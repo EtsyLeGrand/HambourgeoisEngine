@@ -4,7 +4,9 @@
 
 class ConsoleLogger : public hambourgeois::ILogger {
 public:
-	virtual ~ConsoleLogger() = default;
+	virtual ~ConsoleLogger() override;
+	ConsoleLogger();
+	
 
-	virtual void Log(std::string& message) override;
+	virtual void Log(const std::string& message) override;
 };

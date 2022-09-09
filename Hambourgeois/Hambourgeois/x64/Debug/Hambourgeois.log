@@ -1,10 +1,12 @@
-﻿  Engine.cpp
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(14,52): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(65,22): warning C4244: 'argument' : conversion de 'float' en 'DWORD', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(116,33): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(116,33): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(116,54): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(116,54): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+﻿  ConsoleLogger.cpp
+  Engine.cpp
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(17,52): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(75,22): warning C4244: 'argument' : conversion de 'float' en 'DWORD', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(131,33): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(131,33): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(131,54): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(131,54): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+  FileLogger.cpp
   SdlInput.cpp
   Génération de code en cours...
   Hambourgeois.vcxproj -> D:\EtienneLetarte\Engin\Hambourgeois\x64\Debug\Hambourgeois.lib

@@ -3,6 +3,9 @@
 #include <time.h>
 #include <Windows.h>
 #include <SdlInput.h>
+#include <ConsoleLogger.h>
+#include <FileLogger.h>
+#include <iostream>
 
 static SDL_Renderer* _renderer = nullptr;
 static SDL_Window* _window = nullptr;
@@ -46,6 +49,13 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 	}
 
 	input = new SdlInput();
+	
+#if !_DEBUG
+	logger = new ConsoleLogger();
+#else
+	logger = new FileLogger();
+#endif
+	logger->Log("Initialization complete");
 	return true;
 }
 
@@ -86,17 +96,22 @@ void hambourgeois::Engine::Update(float dt)
 	{
 		if (input->IsKeyDown(SDL_SCANCODE_W)) {
 			yPos -= 100 * dt;
+			logger->Log("W down!");
 		}
 		if (input->IsKeyDown(SDL_SCANCODE_A)) {
 			xPos -= 100 * dt;
+			logger->Log("A down!");
 		}
 		if (input->IsKeyDown(SDL_SCANCODE_S)) {
 			yPos += 100 * dt;
+			logger->Log("S down!");
 		}
 		if (input->IsKeyDown(SDL_SCANCODE_D)) {
 			xPos += 100 * dt;
+			logger->Log("D down!");
 		}
 		if (input->IsKeyDown(SDL_SCANCODE_ESCAPE)) {
+			logger->Log("Exiting with Escape!");
 			Exit();
 		}
 	}
@@ -122,8 +137,12 @@ void hambourgeois::Engine::Render()
 
 void hambourgeois::Engine::Shutdown()
 {
+	logger->Log("Shutting down...");
 	if (input != nullptr)
 		delete input;
+
+	if (logger != nullptr)
+		delete logger;
 
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);

@@ -20,7 +20,7 @@ namespace hambourgeois {
 	public:
 		virtual ~ILogger() = default;
 
-		virtual void Log(std::string& message) = 0;
+		virtual void Log(const std::string& message) = 0;
 	};
 
 	class Engine final {
@@ -30,6 +30,7 @@ namespace hambourgeois {
 		static void Exit();
 
 		IInput& Input() const { return *input; }
+		ILogger& Logger() const { return *logger; }
 
 	private:
 		void ProcessInput();
@@ -42,5 +43,9 @@ namespace hambourgeois {
 		bool isInit = false;
 
 		IInput* input = nullptr;
+		ILogger* logger = nullptr;
+
+	public:
+		
 	};
 }

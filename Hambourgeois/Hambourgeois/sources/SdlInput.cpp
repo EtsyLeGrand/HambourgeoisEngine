@@ -37,7 +37,7 @@ void SdlInput::Update()
 
 bool SdlInput::IsKeyDown(int key)
 {
-	if (keyStates == nullptr) return 0;
+	if (keyStates == nullptr) return false;
 	return keyStates[key];
 }
 
