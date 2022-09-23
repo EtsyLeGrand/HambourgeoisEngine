@@ -31,3 +31,8 @@
 *.out
 *.app
 *.log
+
+*.pdb
+*.ipch
+*.ilk
+*.tlog
