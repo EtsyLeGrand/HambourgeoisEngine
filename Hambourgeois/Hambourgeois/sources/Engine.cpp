@@ -4,10 +4,13 @@
 #include <time.h>
 #include <Windows.h>
 #include <SdlInput.h>
+#include <SdlGraphics.h>
 #include <ConsoleLogger.h>
 #include <FileLogger.h>
 #include <iostream>
 #include <vld.h>
+#include <Color.h>
+#include <Rect.h>
 
 static SDL_Renderer* _renderer = nullptr;
 static SDL_Window* _window = nullptr;
@@ -38,28 +41,10 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 		return false;
 	}
 
-	int x = SDL_WINDOWPOS_CENTERED;
-	int y = SDL_WINDOWPOS_CENTERED;
-
-	uint32_t flags = SDL_WINDOW_TOOLTIP | SDL_WINDOW_RESIZABLE;
-	_window = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
-
-	if (!_window)
-	{
-		logger->Log(SDL_GetError());
-		return false;
-	}
-
-	flags = SDL_RENDERER_ACCELERATED;
-	_renderer = SDL_CreateRenderer(_window, -1, flags);
-
-	if (!_renderer)
-	{
-		SDL_Log(SDL_GetError());
-		return false;
-	}
-
+	graphics = new SdlGraphics();
+	graphics->Initialize("Donki kounge", 800, 600);
 	input = new SdlInput();
+	
 	
 	return true;
 }
@@ -129,26 +114,28 @@ void hambourgeois::Engine::Update(float dt)
 
 void hambourgeois::Engine::Render()
 {
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
-	SDL_RenderClear(_renderer);
+	graphics->SetColor(Color::WHITE);
 
-	SDL_Rect initialRect = { 1 + (47 * 0), 1, 44, 32 }; // +47
+	graphics->Clear();
 
+	SDL_Rect initialRect = { 1 + (47 * 0), 1, 44, 32 };
 	SDL_Rect destRect = { 100, 100, 88, 64 };
 	
+	//graphics->DrawTexture();
 	SDL_RenderCopyEx(_renderer, dkTexture, &initialRect, &destRect, 0, NULL, SDL_FLIP_NONE);
 
 	SDL_SetRenderDrawColor(_renderer, 255, 0, 0, 255);
 	
 	int w, h;
-
 	SDL_GetWindowSize(_window, &w, &h);
 
 	SDL_Rect rect = { static_cast<int>((w / 2 - 25) + xPos), static_cast<int>((h / 2 - 25) + yPos), 50, 50 };
 
+	//graphics->FillRect()
 	SDL_RenderFillRect(_renderer, &rect);
 
-	SDL_RenderPresent(_renderer);
+
+	graphics->Present();
 }
 
 void hambourgeois::Engine::Shutdown()
@@ -160,7 +147,8 @@ void hambourgeois::Engine::Shutdown()
 	if (logger != nullptr)
 		delete logger;
 
-	SDL_DestroyRenderer(_renderer);
-	SDL_DestroyWindow(_window);
+	if (graphics != nullptr)
+		delete graphics;
+
 	SDL_Quit();
 }

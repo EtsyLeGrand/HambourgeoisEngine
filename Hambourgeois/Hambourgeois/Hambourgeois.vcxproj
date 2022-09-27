@@ -143,15 +143,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\Color.h" />
     <ClInclude Include="includes\ConsoleLogger.h" />
     <ClInclude Include="includes\Engine.h" />
     <ClInclude Include="includes\FileLogger.h" />
+    <ClInclude Include="includes\Rect.h" />
+    <ClInclude Include="includes\SdlGraphics.h" />
     <ClInclude Include="includes\SdlInput.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\Color.cpp" />
     <ClCompile Include="sources\ConsoleLogger.cpp" />
     <ClCompile Include="sources\Engine.cpp" />
     <ClCompile Include="sources\FileLogger.cpp" />
+    <ClCompile Include="sources\SdlGraphics.cpp" />
     <ClCompile Include="sources\SdlInput.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

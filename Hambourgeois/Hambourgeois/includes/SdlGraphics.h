@@ -1,0 +1,47 @@
+#pragma once
+
+#include <Engine.h>
+
+struct SDL_Window;
+struct SDL_Renderer;
+
+class SdlGraphics : public hambourgeois::IGraphics {
+public:
+
+	virtual ~SdlGraphics() override;
+	SdlGraphics();
+
+	virtual bool Initialize(const std::string &title, int w, int h) override;
+	virtual void Shutdown() override;
+
+	virtual void SetColor(const hambourgeois::Color &color) override;
+
+	virtual void Clear() override;
+
+	virtual void Present() override;
+
+	virtual void DrawRect(float x, float y, float w, float h, const hambourgeois::Color &color) override;
+	virtual void DrawRect(const hambourgeois::RectF &rect, const hambourgeois::Color &color) override;
+
+	virtual void FillRect(float x, float y, float w, float h, const hambourgeois::Color &color) override;
+	virtual void FillRect(const hambourgeois::RectF &rect, const hambourgeois::Color &color) override;
+
+	virtual void DrawLine(float x1, float y1, float x2, float y2, const hambourgeois::Color &color) override;
+	virtual size_t LoadTexture(const std::string &filename) override;
+
+	//virtual void DrawTexture(size_t id, const hambourgeois::RectI &src, const hambourgeois::RectF &dst, double angle, const Flip &flip, const Color &color) override;
+
+	virtual void DrawTexture(size_t id, const hambourgeois::RectF &dst, const hambourgeois::Color &color) override;
+	virtual void DrawTexture(size_t id, const hambourgeois::Color &color) override;
+
+	virtual void GetTextureSize(size_t id, int* w, int* h) override;
+
+	virtual size_t LoadFont(const std::string &filename, int fontSize) override;
+	virtual void DrawString(const std::string &text, size_t fontId, float x, float y, const hambourgeois::Color &color) override;
+
+	virtual void GetTextSize(const std::string &text, size_t fontId, int* w, int* h) override;
+
+private:
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+};
