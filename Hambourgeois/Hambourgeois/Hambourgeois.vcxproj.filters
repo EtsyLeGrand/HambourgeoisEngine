@@ -36,6 +36,12 @@
     <ClInclude Include="includes\SdlGraphics.h">
       <Filter>includes</Filter>
     </ClInclude>
+    <ClInclude Include="includes\SdlServiceProvider.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\SdlAudio.h">
+      <Filter>includes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp">
@@ -54,6 +60,12 @@
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="sources\SdlGraphics.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\SdlServiceProvider.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\SdlAudio.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

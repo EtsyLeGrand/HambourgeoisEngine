@@ -1,6 +1,74 @@
-﻿  ConsoleLogger.cpp
+﻿  Color.cpp
+  ConsoleLogger.cpp
   Engine.cpp
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\includes\Color.h(8,5): warning C4099: 'hambourgeois::Color' : nom de type déjà rencontré avec 'struct' et utilisant maintenant 'class'
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\includes\Color.h(7): message : voir la déclaration de 'hambourgeois::Color'
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(150,47): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(150,47): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(150,86): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(150,86): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
   FileLogger.cpp
+  SdlAudio.cpp
+  SdlGraphics.cpp
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\includes\Color.h(8,5): warning C4099: 'hambourgeois::Color' : nom de type déjà rencontré avec 'struct' et utilisant maintenant 'class'
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\includes\Color.h(7): message : voir la déclaration de 'hambourgeois::Color'
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,23): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,23): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,26): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,26): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,29): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,29): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,32): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(72,32): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,27): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,27): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,35): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,35): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,43): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,43): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,51): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(79,51): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,23): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,23): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,26): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,26): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,29): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,29): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,32): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(86,32): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,27): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,27): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,35): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,35): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,43): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,43): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,51): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(93,51): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(101,43): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(101,39): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(101,35): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(101,31): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,27): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,27): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,34): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,34): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,41): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,41): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,48): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(118,48): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,27): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,27): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,34): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,34): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,41): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,41): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,48): warning C4838: la conversion de 'const float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(127,48): warning C4244: 'initialisation' : conversion de 'const float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(173,20): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(173,20): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(173,23): warning C4838: la conversion de 'float' en 'int' requiert une conversion restrictive
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlGraphics.cpp(173,23): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
   SdlInput.cpp
+  SdlServiceProvider.cpp
   Génération de code en cours...
   Hambourgeois.vcxproj -> D:\EtienneLetarte\Engin\Hambourgeois\x64\Debug\Hambourgeois.lib

@@ -1,10 +1,14 @@
 #include <Engine.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <time.h>
 #include <Windows.h>
 #include <SdlInput.h>
 #include <SdlGraphics.h>
+#include <SdlAudio.h>
+#include <SdlServiceProvider.h>
 #include <ConsoleLogger.h>
 #include <FileLogger.h>
 #include <iostream>
@@ -12,12 +16,13 @@
 #include <Color.h>
 #include <Rect.h>
 
-static SDL_Renderer* _renderer = nullptr;
-static SDL_Window* _window = nullptr;
 static unsigned char const* _keys = nullptr;
 static bool isRunning = false;
 
-static SDL_Texture* dkTexture = nullptr;
+static size_t dkid;
+static size_t fontid;
+static size_t soundid;
+static size_t musicid;
 
 static const float TARGET_FPS = 60.0f;
 static const float MS_PER_FRAME = (1000 / TARGET_FPS);
@@ -33,19 +38,30 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 	logger = new FileLogger();
 #endif
 
-	logger->Log("Initialization complete");
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	serviceProvider = new SdlServiceProvider();
+	if (!serviceProvider->Initialize())
 	{
-		logger->Log(SDL_GetError());
+		logger->Log("Couldn't Initialize Service Provider");
 		return false;
 	}
 
 	graphics = new SdlGraphics();
-	graphics->Initialize("Donki kounge", 800, 600);
+	if (!graphics->Initialize(title, w, h))
+	{
+		logger->Log("Couldn't Initialize Graphics");
+		return false;
+	}
+
+	audio = new SdlAudio();
+	if (!audio->Initialize())
+	{
+		logger->Log("Couldn't Initialize Audio");
+		return false;
+	}
+
 	input = new SdlInput();
 	
-	
+	logger->Log("Initialization complete");
 	return true;
 }
 
@@ -53,7 +69,13 @@ void hambourgeois::Engine::Start()
 {
 	isRunning = true;
 
-	dkTexture = IMG_LoadTexture(_renderer, "ressources/images/dk.png");
+	dkid = graphics->LoadTexture("ressources/images/dk.png");
+	fontid = graphics->LoadFont("ressources/fonts/AldotheApache.ttf", 100);
+	soundid = audio->LoadSound("ressources/audio/coin.mp3");
+	musicid = audio->LoadMusic("ressources/audio/barbies.wav");
+
+	audio->PlaySFX(soundid);
+	audio->PlayMusic(musicid);
 
 	clock_t lastTime = clock();
 
@@ -114,27 +136,24 @@ void hambourgeois::Engine::Update(float dt)
 
 void hambourgeois::Engine::Render()
 {
-	graphics->SetColor(Color::WHITE);
-
 	graphics->Clear();
-
-	SDL_Rect initialRect = { 1 + (47 * 0), 1, 44, 32 };
-	SDL_Rect destRect = { 100, 100, 88, 64 };
 	
-	//graphics->DrawTexture();
-	SDL_RenderCopyEx(_renderer, dkTexture, &initialRect, &destRect, 0, NULL, SDL_FLIP_NONE);
-
-	SDL_SetRenderDrawColor(_renderer, 255, 0, 0, 255);
+	RectI initialRect = { 1 + (47 * 0), 1, 44, 32 };
+	RectF destRect = { 100, 100, 88, 64 };
+	Flip noFlip, flip = { false, false };
+	
+	graphics->DrawTexture(dkid, initialRect, destRect, 0, noFlip, Color::WHITE);
+	graphics->SetColor(Color::RED);
 	
 	int w, h;
-	SDL_GetWindowSize(_window, &w, &h);
+	graphics->GetWindowSize(&w, &h);
+	RectF rect = { static_cast<int>((w / 2 - 25) + xPos), static_cast<int>((h / 2 - 25) + yPos), 50, 50 };
 
-	SDL_Rect rect = { static_cast<int>((w / 2 - 25) + xPos), static_cast<int>((h / 2 - 25) + yPos), 50, 50 };
-
-	//graphics->FillRect()
-	SDL_RenderFillRect(_renderer, &rect);
-
-
+	graphics->FillRect(rect, Color::SIENNA);
+	graphics->DrawRect(rect, Color::DARKOLIVEGREEN);
+	graphics->DrawLine(0, 0, 800, 600, Color::ANTIQUEWHITE);
+	graphics->DrawString("Hello!", fontid, 150, 150, Color::WHITE);
+	
 	graphics->Present();
 }
 
@@ -150,5 +169,10 @@ void hambourgeois::Engine::Shutdown()
 	if (graphics != nullptr)
 		delete graphics;
 
-	SDL_Quit();
+	if (audio != nullptr)
+		delete audio;
+
+	serviceProvider->Quit();
+	if (serviceProvider != nullptr)
+		delete serviceProvider;
 }

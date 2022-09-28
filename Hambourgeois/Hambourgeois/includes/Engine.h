@@ -1,12 +1,12 @@
 #pragma once
 
 #include <string>
-#include <Color.h>
-#include <Rect.h>
-
-struct Flip;
 
 namespace hambourgeois {
+	struct Color;
+	struct RectF;
+	struct RectI;
+	struct Flip;
 	class IInput {
 	public:
 		virtual ~IInput() = default;
@@ -50,7 +50,7 @@ namespace hambourgeois {
 		virtual void DrawLine(float x1, float y1, float x2, float y2, const hambourgeois::Color& color) = 0;
 		virtual size_t LoadTexture(const std::string& filename) = 0;
 
-		//virtual void DrawTexture(size_t id, const hambourgeois::RectI& src, const hambourgeois::RectF& dst, double angle, const Flip& flip, const hambourgeois::Color& color) = 0;
+		virtual void DrawTexture(size_t id, const hambourgeois::RectI& src, const hambourgeois::RectF& dst, double angle, const hambourgeois::Flip& flip, const hambourgeois::Color& color) = 0;
 
 		virtual void DrawTexture(size_t id, const hambourgeois::RectF& dst, const hambourgeois::Color& color) = 0;
 		virtual void DrawTexture(size_t id, const hambourgeois::Color& color) = 0;
@@ -62,12 +62,38 @@ namespace hambourgeois {
 
 		virtual void GetTextSize(const std::string& text, size_t fontId, int* w, int* h) = 0;
 	
+		virtual void GetWindowSize(int* w, int* h) = 0;
+	};
+
+	class IAudio {
+	public:
+		virtual ~IAudio() = default;
+
+		virtual bool Initialize() = 0;
+
+		virtual size_t LoadMusic(const std::string& filename) = 0;
+		virtual size_t LoadSound(const std::string& filename) = 0;
+
+		virtual void PlayMusic(size_t id) = 0;
+		virtual void PlayMusic(size_t id, int loop) = 0;
+
+		virtual void PlaySFX(size_t id) = 0;
+		virtual void PlaySFX(size_t id, int loop) = 0;
+
+		virtual void PauseMusic() = 0; 
+		virtual void StopMusic() = 0;
+		virtual void ResumeMusic() = 0;
+
+		virtual void SetVolume(int volume) = 0; 
+		virtual void SetVolume(size_t soundId, int volume) = 0;
 	};
 
 	class IServiceProvider {
 	public:
 		virtual ~IServiceProvider() = default;
-		 // SDL Service provider
+
+		virtual bool Initialize() = 0;
+		virtual bool Quit() = 0;
 	};
 
 	class Engine final {
@@ -79,6 +105,8 @@ namespace hambourgeois {
 		IInput& Input() const { return *input; }
 		ILogger& Logger() const { return *logger; }
 		IGraphics& Graphics() const { return *graphics; }
+		IServiceProvider& ServiceProvider() const { return *serviceProvider; }
+		IAudio& Audio() const { return *audio; }
 
 	private:
 		void ProcessInput();
@@ -93,8 +121,8 @@ namespace hambourgeois {
 		IInput* input = nullptr;
 		ILogger* logger = nullptr;
 		IGraphics* graphics = nullptr;
-
-	public:
+		IServiceProvider* serviceProvider = nullptr;
+		IAudio* audio = nullptr;
 		
 	};
 }

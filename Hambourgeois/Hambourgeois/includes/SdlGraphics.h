@@ -1,13 +1,13 @@
 #pragma once
 
 #include <Engine.h>
+#include <unordered_map>
 
-struct SDL_Window;
-struct SDL_Renderer;
+struct SDL_Texture;
+struct _TTF_Font;
 
 class SdlGraphics : public hambourgeois::IGraphics {
 public:
-
 	virtual ~SdlGraphics() override;
 	SdlGraphics();
 
@@ -29,7 +29,7 @@ public:
 	virtual void DrawLine(float x1, float y1, float x2, float y2, const hambourgeois::Color &color) override;
 	virtual size_t LoadTexture(const std::string &filename) override;
 
-	//virtual void DrawTexture(size_t id, const hambourgeois::RectI &src, const hambourgeois::RectF &dst, double angle, const Flip &flip, const Color &color) override;
+	virtual void DrawTexture(size_t id, const hambourgeois::RectI &src, const hambourgeois::RectF &dst, double angle, const hambourgeois::Flip &flip, const hambourgeois::Color &color) override;
 
 	virtual void DrawTexture(size_t id, const hambourgeois::RectF &dst, const hambourgeois::Color &color) override;
 	virtual void DrawTexture(size_t id, const hambourgeois::Color &color) override;
@@ -41,7 +41,9 @@ public:
 
 	virtual void GetTextSize(const std::string &text, size_t fontId, int* w, int* h) override;
 
+	virtual void GetWindowSize(int* w, int* h) override;
+
 private:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	std::unordered_map<size_t, SDL_Texture*> textureCache;
+	std::unordered_map<size_t, _TTF_Font*> fontCache;
 };

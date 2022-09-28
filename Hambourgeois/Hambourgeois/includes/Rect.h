@@ -17,4 +17,10 @@ namespace hambourgeois
         int w;
         int h;
     };
+
+    struct Flip
+    {
+        bool h;
+        bool v;
+    };
 }
