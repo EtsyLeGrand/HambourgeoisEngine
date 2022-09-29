@@ -1,10 +1,5 @@
-﻿  ConsoleLogger.cpp
-  Engine.cpp
-  FileLogger.cpp
-  SdlAudio.cpp
-  SdlGraphics.cpp
-  SdlInput.cpp
-  SdlServiceProvider.cpp
+﻿  Color.cpp
+  ConsoleLogger.cpp
   World.cpp
   Génération de code en cours...
   Hambourgeois.vcxproj -> D:\EtienneLetarte\Engin\Hambourgeois\x64\Debug\Hambourgeois.lib
