@@ -42,6 +42,9 @@
     <ClInclude Include="includes\SdlAudio.h">
       <Filter>includes</Filter>
     </ClInclude>
+    <ClInclude Include="includes\World.h">
+      <Filter>includes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp">
@@ -66,6 +69,9 @@
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="sources\SdlAudio.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\World.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

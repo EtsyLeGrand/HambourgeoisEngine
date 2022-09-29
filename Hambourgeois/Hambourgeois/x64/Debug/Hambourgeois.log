@@ -1,17 +1,10 @@
 ﻿  ConsoleLogger.cpp
   Engine.cpp
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\includes\Color.h(8,5): warning C4099: 'hambourgeois::Color' : nom de type déjà rencontré avec 'struct' et utilisant maintenant 'class'
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\includes\Color.h(7): message : voir la déclaration de 'hambourgeois::Color'
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(159,47): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(159,47): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(159,86): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(159,86): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(162,30): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(162,27): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(163,68): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\Engine.cpp(163,55): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   FileLogger.cpp
   SdlAudio.cpp
+  SdlGraphics.cpp
+  SdlInput.cpp
   SdlServiceProvider.cpp
+  World.cpp
   Génération de code en cours...
   Hambourgeois.vcxproj -> D:\EtienneLetarte\Engin\Hambourgeois\x64\Debug\Hambourgeois.lib

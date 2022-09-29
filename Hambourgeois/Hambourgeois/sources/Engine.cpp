@@ -19,7 +19,6 @@
 #include <ConsoleLogger.h>
 #include <FileLogger.h>
 
-
 static unsigned char const* _keys = nullptr;
 static bool isRunning = false;
 
@@ -156,11 +155,12 @@ void hambourgeois::Engine::Render()
 	graphics->SetColor(Color::RED);
 	
 	
-	RectF rect = { static_cast<int>((w / 2 - 25) + xPos), static_cast<int>((h / 2 - 25) + yPos), 50, 50 };
+	RectF rect = { static_cast<float>((w / 2 - 25) + xPos), static_cast<float>((h / 2 - 25) + yPos), 50, 50 };
 
 	graphics->FillRect(rect, Color::ROSYBROWN);
-	graphics->DrawLine(0, 0, w, h, Color::ANTIQUEWHITE);
-	graphics->DrawString("douneki koune!", fontid, w / 2 - 300, h / 2 - 200, Color::WHITE);
+	graphics->DrawLine(static_cast<float>(0), static_cast<float>(0),
+		static_cast<float>(w), static_cast<float>(h), Color::ANTIQUEWHITE);
+	graphics->DrawString("douneki koune!", fontid, static_cast<float>(w / 2 - 300), static_cast<float>(h / 2 - 200), Color::WHITE);
 	
 	graphics->Present();
 }

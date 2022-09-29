@@ -152,6 +152,7 @@
     <ClInclude Include="includes\SdlGraphics.h" />
     <ClInclude Include="includes\SdlInput.h" />
     <ClInclude Include="includes\SdlServiceProvider.h" />
+    <ClInclude Include="includes\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Color.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="sources\SdlGraphics.cpp" />
     <ClCompile Include="sources\SdlInput.cpp" />
     <ClCompile Include="sources\SdlServiceProvider.cpp" />
+    <ClCompile Include="sources\World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -69,28 +69,32 @@ void SdlGraphics::Present()
 
 void SdlGraphics::DrawRect(float x, float y, float w, float h, const hambourgeois::Color& color)
 {
-	SDL_Rect sdlrect = { x, y, w, h };
+	SDL_Rect sdlrect = { static_cast<int>(x), static_cast<int>(y), 
+		static_cast<int>(w), static_cast<int>(h) };
 	SetColor(color);
 	SDL_RenderDrawRect(renderer, &sdlrect);
 }
 
 void SdlGraphics::DrawRect(const hambourgeois::RectF& rect, const hambourgeois::Color& color)
 {
-	SDL_Rect sdlrect = { rect.x, rect.y, rect.w, rect.h };
+	SDL_Rect sdlrect = { static_cast<int>(rect.x), static_cast<int>(rect.y),
+		static_cast<int>(rect.w), static_cast<int>(rect.h) };
 	SetColor(color);
 	SDL_RenderDrawRect(renderer, &sdlrect);
 }
 
 void SdlGraphics::FillRect(float x, float y, float w, float h, const hambourgeois::Color& color)
 {
-	SDL_Rect sdlrect = { x, y, w, h };
+	SDL_Rect sdlrect = { static_cast<int>(x), static_cast<int>(y),
+		static_cast<int>(w), static_cast<int>(h) };
 	SetColor(color);
 	SDL_RenderFillRect(renderer, &sdlrect);
 }
 
 void SdlGraphics::FillRect(const hambourgeois::RectF& rect, const hambourgeois::Color& color)
 {
-	SDL_Rect sdlrect = { rect.x, rect.y, rect.w, rect.h };
+	SDL_Rect sdlrect = { static_cast<int>(rect.x), static_cast<int>(rect.y),
+		static_cast<int>(rect.w), static_cast<int>(rect.h) };
 	SetColor(color);
 	SDL_RenderFillRect(renderer, &sdlrect);
 }
@@ -98,7 +102,8 @@ void SdlGraphics::FillRect(const hambourgeois::RectF& rect, const hambourgeois::
 void SdlGraphics::DrawLine(float x1, float y1, float x2, float y2, const hambourgeois::Color& color)
 {
 	SetColor(color);
-	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+	SDL_RenderDrawLine(renderer, static_cast<int>(x1), static_cast<int>(y1),
+		static_cast<int>(x2), static_cast<int>(y2));
 }
 
 size_t SdlGraphics::LoadTexture(const std::string& filename)
@@ -114,8 +119,11 @@ size_t SdlGraphics::LoadTexture(const std::string& filename)
 
 void SdlGraphics::DrawTexture(size_t id, const hambourgeois::RectI& src, const hambourgeois::RectF& dst, double angle, const hambourgeois::Flip& flip, const hambourgeois::Color& color)
 {
-	SDL_Rect initialRect = { src.x, src.y, src.w, src.h };
-	SDL_Rect destRect = { dst.x, dst.y, dst.w, dst.h };
+	SDL_Rect initialRect = { static_cast<int>(src.x), static_cast<int>(src.y),
+		static_cast<int>(src.w), static_cast<int>(src.h) };
+	SDL_Rect destRect = { static_cast<int>(dst.x), static_cast<int>(dst.y),
+		static_cast<int>(dst.w), static_cast<int>(dst.h) };
+
 	SDL_RendererFlip rendererFlip = (SDL_RendererFlip)((int)flip.h | (int)flip.v << 1);
 	SDL_SetTextureColorMod(textureCache[id], color.red, color.green, color.blue);
 	SDL_SetTextureAlphaMod(textureCache[id], color.alpha);
@@ -124,7 +132,9 @@ void SdlGraphics::DrawTexture(size_t id, const hambourgeois::RectI& src, const h
 
 void SdlGraphics::DrawTexture(size_t id, const hambourgeois::RectF& dst, const hambourgeois::Color& color)
 {
-	SDL_Rect destRect = { dst.x, dst.y, dst.h, dst.w };
+	SDL_Rect destRect = { static_cast<int>(dst.x), static_cast<int>(dst.y),
+		static_cast<int>(dst.w), static_cast<int>(dst.h) };
+
 	SDL_SetTextureColorMod(textureCache[id], color.red, color.green, color.blue);
 	SDL_SetTextureAlphaMod(textureCache[id], color.alpha);
 	SDL_RenderCopyEx(renderer, textureCache[id], NULL, &destRect, 0, NULL, SDL_FLIP_NONE);
@@ -170,7 +180,8 @@ void SdlGraphics::DrawString(const std::string& text, size_t fontId, float x, fl
 		SDL_Color c = { color.red, color.green, color.blue, color.alpha };
 		SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), c);
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-		SDL_Rect dst = { x, y, surface->w, surface->h };
+		SDL_Rect dst = { static_cast<int>(x), static_cast<int>(y),
+			static_cast<int>(surface->w), static_cast<int>(surface->h) };
 
 		SDL_RenderCopy(renderer, texture, nullptr, &dst);
 		SDL_FreeSurface(surface);

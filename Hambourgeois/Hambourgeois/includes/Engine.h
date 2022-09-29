@@ -1,12 +1,10 @@
 #pragma once
 
 #include <string>
+#include <Color.h>
+#include <Rect.h>
 
 namespace hambourgeois {
-	struct Color;
-	struct RectF;
-	struct RectI;
-	struct Flip;
 	class IInput {
 	public:
 		virtual ~IInput() = default;
@@ -96,6 +94,17 @@ namespace hambourgeois {
 		virtual bool Quit() = 0;
 	};
 
+	class IWorld {
+	public:
+		virtual ~IWorld() = default;
+
+		virtual void Init() = 0;
+		virtual void Shutdown() = 0;
+		virtual void Update(float dt) = 0;
+		virtual bool Add() = 0;
+		virtual bool Remove() = 0;
+		virtual bool Find() = 0;
+	};
 	class Engine final {
 	public:
 		bool Init(const std::string& title, int w, int h);
