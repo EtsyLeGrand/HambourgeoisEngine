@@ -1,5 +1,11 @@
 ﻿  Color.cpp
   ConsoleLogger.cpp
+  Engine.cpp
+  FileLogger.cpp
+  SdlAudio.cpp
+  SdlGraphics.cpp
+  SdlInput.cpp
+  SdlServiceProvider.cpp
   World.cpp
   Génération de code en cours...
-  Hambourgeois.vcxproj -> D:\EtienneLetarte\Engin\Hambourgeois\x64\Debug\Hambourgeois.lib
+D:\EtienneLetarte\Engin\Hambourgeois\Hambourgeois\sources\SdlAudio.cpp : fatal error C1090: Échec de l'appel de l'API PDB, code d'erreur '3' : D:\EtienneLetarte\Engin\Hambourgeois\x64\Debug\Hambourgeois.pdb
