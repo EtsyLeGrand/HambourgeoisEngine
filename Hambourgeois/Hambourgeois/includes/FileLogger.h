@@ -6,7 +6,7 @@
 
 class FileLogger : public hambourgeois::ILogger {
 public:
-	virtual ~FileLogger() override;
+	virtual ~FileLogger();
 	FileLogger();
 	
 	virtual void Log(const std::string& message) override;

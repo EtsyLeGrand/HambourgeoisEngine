@@ -9,7 +9,7 @@ struct _Mix_Music;
 class SdlAudio : public hambourgeois::IAudio {
 public:
 	SdlAudio();
-	virtual ~SdlAudio() override;
+	virtual ~SdlAudio();
 
 	virtual bool Initialize() override;
 

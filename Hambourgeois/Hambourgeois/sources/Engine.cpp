@@ -1,20 +1,24 @@
 #include <Engine.h>
+#include <Color.h>
+#include <Rect.h>
+
+#include <time.h>
+#include <Windows.h>
+#include <iostream>
+#include <vld.h>
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
-#include <time.h>
-#include <Windows.h>
+
 #include <SdlInput.h>
 #include <SdlGraphics.h>
 #include <SdlAudio.h>
 #include <SdlServiceProvider.h>
 #include <ConsoleLogger.h>
 #include <FileLogger.h>
-#include <iostream>
-#include <vld.h>
-#include <Color.h>
-#include <Rect.h>
+
 
 static unsigned char const* _keys = nullptr;
 static bool isRunning = false;
@@ -44,6 +48,7 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 		logger->Log("Couldn't Initialize Service Provider");
 		return false;
 	}
+	else { logger->Log("Service Provider OK"); }
 
 	graphics = new SdlGraphics();
 	if (!graphics->Initialize(title, w, h))
@@ -51,6 +56,7 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 		logger->Log("Couldn't Initialize Graphics");
 		return false;
 	}
+	else { logger->Log("Graphics Service OK"); }
 
 	audio = new SdlAudio();
 	if (!audio->Initialize())
@@ -58,6 +64,7 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 		logger->Log("Couldn't Initialize Audio");
 		return false;
 	}
+	else { logger->Log("Audio Service OK"); }
 
 	input = new SdlInput();
 	
@@ -128,7 +135,7 @@ void hambourgeois::Engine::Update(float dt)
 			logger->Log("D down!");
 		}
 		if (input->IsKeyDown(SDL_SCANCODE_ESCAPE)) {
-			logger->Log("Exiting with Escape!");
+			logger->Log("Exiting with keypress!");
 			Exit();
 		}
 	}
@@ -138,21 +145,22 @@ void hambourgeois::Engine::Render()
 {
 	graphics->Clear();
 	
+	int w, h;
+	graphics->GetWindowSize(&w, &h);
+
 	RectI initialRect = { 1 + (47 * 0), 1, 44, 32 };
-	RectF destRect = { 100, 100, 88, 64 };
+	RectF destRect = { 0, 0, 88, 64 };
 	Flip noFlip, flip = { false, false };
 	
 	graphics->DrawTexture(dkid, initialRect, destRect, 0, noFlip, Color::WHITE);
 	graphics->SetColor(Color::RED);
 	
-	int w, h;
-	graphics->GetWindowSize(&w, &h);
+	
 	RectF rect = { static_cast<int>((w / 2 - 25) + xPos), static_cast<int>((h / 2 - 25) + yPos), 50, 50 };
 
-	graphics->FillRect(rect, Color::SIENNA);
-	graphics->DrawRect(rect, Color::DARKOLIVEGREEN);
-	graphics->DrawLine(0, 0, 800, 600, Color::ANTIQUEWHITE);
-	graphics->DrawString("Hello!", fontid, 150, 150, Color::WHITE);
+	graphics->FillRect(rect, Color::ROSYBROWN);
+	graphics->DrawLine(0, 0, w, h, Color::ANTIQUEWHITE);
+	graphics->DrawString("douneki koune!", fontid, w / 2 - 300, h / 2 - 200, Color::WHITE);
 	
 	graphics->Present();
 }
@@ -172,7 +180,6 @@ void hambourgeois::Engine::Shutdown()
 	if (audio != nullptr)
 		delete audio;
 
-	serviceProvider->Quit();
 	if (serviceProvider != nullptr)
 		delete serviceProvider;
 }

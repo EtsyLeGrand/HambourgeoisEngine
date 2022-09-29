@@ -8,7 +8,7 @@ struct _TTF_Font;
 
 class SdlGraphics : public hambourgeois::IGraphics {
 public:
-	virtual ~SdlGraphics() override;
+	virtual ~SdlGraphics();
 	SdlGraphics();
 
 	virtual bool Initialize(const std::string &title, int w, int h) override;

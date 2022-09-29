@@ -7,6 +7,7 @@ SdlServiceProvider::SdlServiceProvider() : hambourgeois::IServiceProvider()
 
 SdlServiceProvider::~SdlServiceProvider()
 {
+	Quit();
 }
 
 bool SdlServiceProvider::Initialize()

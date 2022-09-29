@@ -4,7 +4,7 @@
 
 class ConsoleLogger : public hambourgeois::ILogger {
 public:
-	virtual ~ConsoleLogger() override;
+	virtual ~ConsoleLogger();
 	ConsoleLogger();
 	
 
