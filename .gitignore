@@ -349,5 +349,3 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 *.idb
-Hambourgeois/DonkeyKong/x64/Debug/vc142.pdb
-Hambourgeois/DonkeyKong/x64/Debug/vc142.idb

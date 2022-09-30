@@ -160,7 +160,7 @@ void hambourgeois::Engine::Render()
 	graphics->FillRect(rect, Color::ROSYBROWN);
 	graphics->DrawLine(static_cast<float>(0), static_cast<float>(0),
 		static_cast<float>(w), static_cast<float>(h), Color::ANTIQUEWHITE);
-	graphics->DrawString("douneki koune!", fontid, static_cast<float>(w / 2 - 300), static_cast<float>(h / 2 - 200), Color::WHITE);
+	graphics->DrawString("End gynez", fontid, static_cast<float>(w / 2 - 300), static_cast<float>(h / 2 - 200), Color::WHITE);
 	
 	graphics->Present();
 }
