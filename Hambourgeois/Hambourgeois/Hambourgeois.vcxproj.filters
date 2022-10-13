@@ -45,6 +45,12 @@
     <ClInclude Include="includes\World.h">
       <Filter>includes</Filter>
     </ClInclude>
+    <ClInclude Include="includes\Entity.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\WorldService.h">
+      <Filter>includes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp">
@@ -72,6 +78,12 @@
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="sources\World.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Entity.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\WorldService.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

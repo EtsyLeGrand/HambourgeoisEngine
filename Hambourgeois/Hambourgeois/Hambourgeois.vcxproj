@@ -146,6 +146,7 @@
     <ClInclude Include="includes\Color.h" />
     <ClInclude Include="includes\ConsoleLogger.h" />
     <ClInclude Include="includes\Engine.h" />
+    <ClInclude Include="includes\Entity.h" />
     <ClInclude Include="includes\FileLogger.h" />
     <ClInclude Include="includes\Rect.h" />
     <ClInclude Include="includes\SdlAudio.h" />
@@ -153,17 +154,20 @@
     <ClInclude Include="includes\SdlInput.h" />
     <ClInclude Include="includes\SdlServiceProvider.h" />
     <ClInclude Include="includes\World.h" />
+    <ClInclude Include="includes\WorldService.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Color.cpp" />
     <ClCompile Include="sources\ConsoleLogger.cpp" />
     <ClCompile Include="sources\Engine.cpp" />
+    <ClCompile Include="sources\Entity.cpp" />
     <ClCompile Include="sources\FileLogger.cpp" />
     <ClCompile Include="sources\SdlAudio.cpp" />
     <ClCompile Include="sources\SdlGraphics.cpp" />
     <ClCompile Include="sources\SdlInput.cpp" />
     <ClCompile Include="sources\SdlServiceProvider.cpp" />
     <ClCompile Include="sources\World.cpp" />
+    <ClCompile Include="sources\WorldService.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
