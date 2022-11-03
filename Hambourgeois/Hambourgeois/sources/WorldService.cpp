@@ -1,6 +1,13 @@
 #include <WorldService.h>
 #include <Entity.h>
 
+Entity* WorldService::Create(const std::string& name)
+{
+	Entity* e = new Entity(name);
+	Add(e);
+	return e;
+}
+
 void WorldService::Update(float dt)
 {
 	for (auto entity : entitiesInWorld) {
@@ -47,4 +54,36 @@ Entity* WorldService::Find(const std::string& name)
 		return entityMap[name];
 	}
 	return nullptr;
+}
+
+void WorldService::Load(const std::string& scene)
+{
+	if (scenes.count(scene) > 0)
+	{
+		Unload();
+		currentScene = scenes[scene];
+		scenes[scene]->Load();
+	}
+}
+
+void WorldService::Register(const std::string& name, hambourgeois::IScene* scene)
+{
+	if (scenes.count(name) == 0)
+	{
+		scenes[name] = scene;
+	}
+}
+
+void WorldService::Unload()
+{
+	if (currentScene != nullptr)
+	{
+		for (auto entity : entitiesInWorld) {
+			entity->Destroy();
+			delete entity;
+		}
+
+		entitiesInWorld.clear();
+		entityMap.clear();
+	}
 }

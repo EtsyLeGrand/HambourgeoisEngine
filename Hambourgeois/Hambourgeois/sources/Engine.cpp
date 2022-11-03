@@ -1,4 +1,5 @@
 #include <Engine.h>
+#include <Scene.h>
 #include <Color.h>
 #include <Rect.h>
 

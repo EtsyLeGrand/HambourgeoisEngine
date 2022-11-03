@@ -182,12 +182,6 @@ namespace hambourgeois {
 		virtual bool Find() = 0;
 	};
 
-	class IScene {
-	public:
-		virtual ~IScene() = default;
-
-
-	};
 	class Engine final {
 	public:
 		bool Init(const std::string& title, int w, int h);

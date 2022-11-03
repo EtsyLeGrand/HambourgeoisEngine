@@ -42,13 +42,22 @@
     <ClInclude Include="includes\SdlAudio.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\World.h">
-      <Filter>includes</Filter>
-    </ClInclude>
     <ClInclude Include="includes\Entity.h">
       <Filter>includes</Filter>
     </ClInclude>
     <ClInclude Include="includes\WorldService.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Scene.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Component.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IUpdatable.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IDrawable.h">
       <Filter>includes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,13 +86,16 @@
     <ClCompile Include="sources\SdlAudio.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\World.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
     <ClCompile Include="sources\Entity.cpp">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="sources\WorldService.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Scene.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Component.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
