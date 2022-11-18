@@ -8,6 +8,7 @@
 
 static SDL_Window* window;
 static SDL_Renderer* renderer;
+static SDL_Texture* texture;
 
 SdlGraphics::SdlGraphics() : hambourgeois::IGraphics()
 {
@@ -16,6 +17,9 @@ SdlGraphics::SdlGraphics() : hambourgeois::IGraphics()
 
 SdlGraphics::~SdlGraphics()
 {
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyTexture(texture);
+	SDL_DestroyWindow(window);
 }
 
 bool SdlGraphics::Initialize(const std::string& title, int w, int h)
@@ -69,7 +73,7 @@ void SdlGraphics::Present()
 
 void SdlGraphics::DrawRect(float x, float y, float w, float h, const hambourgeois::Color& color)
 {
-	SDL_Rect sdlrect = { static_cast<int>(x), static_cast<int>(y), 
+	SDL_Rect sdlrect = { static_cast<int>(x), static_cast<int>(y),
 		static_cast<int>(w), static_cast<int>(h) };
 	SetColor(color);
 	SDL_RenderDrawRect(renderer, &sdlrect);
@@ -150,14 +154,14 @@ void SdlGraphics::DrawTexture(size_t id, const hambourgeois::Color& color)
 void SdlGraphics::GetTextureSize(size_t id, int* w, int* h)
 {
 	if (textureCache.count(id) > 0)
-	{ 
-		SDL_Texture* _tex = textureCache[id]; 
-		SDL_QueryTexture(_tex, nullptr, nullptr, w, h); 
+	{
+		SDL_Texture* _tex = textureCache[id];
+		SDL_QueryTexture(_tex, nullptr, nullptr, w, h);
 	}
-	else 
-	{ 
-		*w = 0; 
-		*h = 0; 
+	else
+	{
+		*w = 0;
+		*h = 0;
 	}
 }
 
@@ -197,4 +201,68 @@ void SdlGraphics::GetTextSize(const std::string& text, size_t fontId, int* w, in
 void SdlGraphics::GetWindowSize(int* w, int* h)
 {
 	SDL_GetWindowSize(window, w, h);
+}
+
+void SdlGraphics::LoadTileset(const std::string& filename, int tileW, int tileH, int col, int count)
+{
+	const size_t textureId = std::hash<std::string>()(filename);
+	if (tilesetCache.find(textureId) != tilesetCache.end())
+	{
+		texture = tilesetCache[textureId];
+	}
+	else
+	{
+		texture = IMG_LoadTexture(renderer, filename.c_str());
+		tilesetCache[textureId] = texture;
+
+		if (texture)
+		{
+			for (int i = 0; i < count; i++)
+			{
+				int y = i / col;
+				int x = i - y * col;
+				hambourgeois::RectI tile
+				{
+					x * tileW,
+					y * tileH,
+					tileW,
+					tileH 
+				};
+
+				tileset.push_back(tile);
+			}
+		}
+	}
+}
+
+void SdlGraphics::DrawTiles(int tileW, int tileH, size_t tileset)
+{
+	TTileset tlset = tilesetRectCache[tileset];
+	for (auto layer : tilemap)
+	{
+		for (int y = 0; y < layer.second.size(); y++)
+		{
+			for (int x = 0; x < layer.second[y].size(); x++)
+			{
+				int _index = layer.second[y][x] - 1;
+				if (_index >= 0)
+				{
+					SDL_Rect _src{
+						tlset[_index].x,
+						tlset[_index].y,
+						tlset[_index].w,
+						tlset[_index].h
+					};
+					SDL_Rect _dst{
+						x * tileW,
+						y * tileH,
+						tileW,
+						tileH };
+
+					SDL_RenderCopyEx(renderer, tilesetCache[tileset],
+						&_src, &_dst, 0.0, nullptr, SDL_FLIP_NONE);
+				}
+			}
+		}
+	}
 }

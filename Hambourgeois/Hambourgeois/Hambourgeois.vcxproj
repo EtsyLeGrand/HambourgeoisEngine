@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\Atlas.h" />
     <ClInclude Include="includes\Color.h" />
     <ClInclude Include="includes\Component.h" />
     <ClInclude Include="includes\ConsoleLogger.h" />
@@ -152,14 +153,16 @@
     <ClInclude Include="includes\IDrawable.h" />
     <ClInclude Include="includes\IUpdatable.h" />
     <ClInclude Include="includes\Rect.h" />
-    <ClInclude Include="includes\Scene.h" />
     <ClInclude Include="includes\SdlAudio.h" />
     <ClInclude Include="includes\SdlGraphics.h" />
     <ClInclude Include="includes\SdlInput.h" />
     <ClInclude Include="includes\SdlServiceProvider.h" />
+    <ClInclude Include="includes\Sprite.h" />
     <ClInclude Include="includes\WorldService.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="includes\Scene.h" />
+    <ClCompile Include="sources\Atlas.cpp" />
     <ClCompile Include="sources\Color.cpp" />
     <ClCompile Include="sources\Component.cpp" />
     <ClCompile Include="sources\ConsoleLogger.cpp" />
@@ -171,6 +174,7 @@
     <ClCompile Include="sources\SdlGraphics.cpp" />
     <ClCompile Include="sources\SdlInput.cpp" />
     <ClCompile Include="sources\SdlServiceProvider.cpp" />
+    <ClCompile Include="sources\Sprite.cpp" />
     <ClCompile Include="sources\WorldService.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

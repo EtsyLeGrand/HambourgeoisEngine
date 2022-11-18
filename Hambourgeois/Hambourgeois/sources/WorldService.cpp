@@ -8,6 +8,14 @@ Entity* WorldService::Create(const std::string& name)
 	return e;
 }
 
+WorldService::~WorldService()
+{
+	for (auto scene : scenes)
+	{
+		delete scene.second;
+	}
+}
+
 void WorldService::Update(float dt)
 {
 	for (auto entity : entitiesInWorld) {
@@ -66,7 +74,7 @@ void WorldService::Load(const std::string& scene)
 	}
 }
 
-void WorldService::Register(const std::string& name, hambourgeois::IScene* scene)
+void WorldService::Register(const std::string& name, Scene* scene)
 {
 	if (scenes.count(name) == 0)
 	{

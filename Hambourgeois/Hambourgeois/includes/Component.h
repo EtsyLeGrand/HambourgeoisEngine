@@ -1,6 +1,8 @@
 #pragma once
+#include <Engine.h>
 
 class Entity;
+
 class Component
 {
 public:
@@ -14,5 +16,11 @@ public:
 	virtual void Destroy() {}
 
 protected:
-	Entity* m_Entity = nullptr;
+	Entity* entity = nullptr;
+
+	hambourgeois::IInput& Input() const;
+	hambourgeois::ILogger& Logger() const;
+	hambourgeois::IGraphics& Graphics() const;
+	hambourgeois::IServiceProvider& ServiceProvider() const;
+	hambourgeois::IAudio& Audio() const;
 };

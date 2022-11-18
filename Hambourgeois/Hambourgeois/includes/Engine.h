@@ -4,6 +4,9 @@
 #include <Color.h>
 #include <Rect.h>
 
+class Entity; 
+class Scene;
+
 namespace hambourgeois {
 	class IInput {
 	public:
@@ -173,17 +176,30 @@ namespace hambourgeois {
 	class IWorld {
 	public:
 		virtual ~IWorld() = default;
-
-		virtual void Init() = 0;
-		virtual void Shutdown() = 0;
+		
 		virtual void Update(float dt) = 0;
-		virtual bool Add() = 0;
-		virtual bool Remove() = 0;
-		virtual bool Find() = 0;
+		virtual void Draw() = 0;
+		virtual void Add(Entity * entity) = 0;
+		virtual void Remove(Entity * entity) = 0;
+		virtual Entity* Find(const std::string & name) = 0;
+		virtual Entity* Create(const std::string & name) = 0;
+
+		virtual void Load(const std::string & scene) = 0;
+		virtual void Register(const std::string & name, Scene * scene) = 0;
+		virtual void Unload() = 0;
 	};
+
+	class IScene {
+	public:
+		virtual ~IScene() = default;
+		virtual void Load() = 0;
+	};
+
 
 	class Engine final {
 	public:
+		static Engine& Get();
+
 		bool Init(const std::string& title, int w, int h);
 		void Start();
 		static void Exit();
@@ -193,6 +209,7 @@ namespace hambourgeois {
 		IGraphics& Graphics() const { return *graphics; }
 		IServiceProvider& ServiceProvider() const { return *serviceProvider; }
 		IAudio& Audio() const { return *audio; }
+		IWorld& World() const { return *world; };
 
 	private:
 		void ProcessInput();
@@ -209,6 +226,6 @@ namespace hambourgeois {
 		IGraphics* graphics = nullptr;
 		IServiceProvider* serviceProvider = nullptr;
 		IAudio* audio = nullptr;
-		
+		IWorld* world = nullptr;
 	};
 }

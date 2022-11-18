@@ -17,6 +17,7 @@
 #include <SdlGraphics.h>
 #include <SdlAudio.h>
 #include <SdlServiceProvider.h>
+#include <WorldService.h>
 #include <ConsoleLogger.h>
 #include <FileLogger.h>
 
@@ -33,6 +34,18 @@ static const float MS_PER_FRAME = (1000 / TARGET_FPS);
 
 static float xPos = 0;
 static float yPos = 0;
+
+static hambourgeois::Engine* engine;
+
+hambourgeois::Engine& hambourgeois::Engine::Get()
+{
+	if (engine == nullptr)
+	{
+		engine = new Engine();
+	}
+
+	return *engine;
+}
 
 bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 {
@@ -67,6 +80,14 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 	else { logger->Log("Audio Service OK"); }
 
 	input = new SdlInput();
+
+	world = new WorldService();
+	if (world == nullptr)
+	{
+		logger->Log("Couldn't Initialize World");
+		return false;
+	}
+	else { logger->Log("World Service OK"); }
 	
 	logger->Log("Initialization complete");
 	return true;
@@ -139,6 +160,11 @@ void hambourgeois::Engine::Update(float dt)
 			Exit();
 		}
 	}
+
+	if (world != nullptr)
+	{
+		world->Update(dt);
+	}
 }
 
 void hambourgeois::Engine::Render()
@@ -163,7 +189,14 @@ void hambourgeois::Engine::Render()
 		static_cast<float>(w), static_cast<float>(h), Color::ANTIQUEWHITE);
 	graphics->DrawString("End gynez", fontid, static_cast<float>(w / 2 - 300), static_cast<float>(h / 2 - 200), Color::WHITE);
 	
+	if (world != nullptr)
+	{
+		world->Draw();
+	}
+
 	graphics->Present();
+
+	
 }
 
 void hambourgeois::Engine::Shutdown()
@@ -183,4 +216,14 @@ void hambourgeois::Engine::Shutdown()
 
 	if (serviceProvider != nullptr)
 		delete serviceProvider;
+
+	if (world != nullptr)
+	{
+		world->Unload();
+		delete world;
+	}
+		
+
+	delete engine;
+	engine = nullptr;
 }

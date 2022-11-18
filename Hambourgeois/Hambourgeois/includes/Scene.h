@@ -1,11 +1,9 @@
 #pragma once
+#include <Entity.h>
 
-namespace hambourgeois {
-
-	class IScene {
-	public:
-		virtual ~IScene() = default;
-		virtual void Load() = 0;
-	};
-
-}
+class Scene : public hambourgeois::IScene{
+public:
+	virtual ~Scene() = default;
+	virtual void Update(float dt) = 0;
+	Entity* Instantiate(const std::string& name);
+};

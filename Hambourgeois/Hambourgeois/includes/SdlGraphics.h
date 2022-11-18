@@ -2,9 +2,14 @@
 
 #include <Engine.h>
 #include <unordered_map>
+#include <map>
 
 struct SDL_Texture;
 struct _TTF_Font;
+
+typedef std::vector<std::vector<int>> TLayer;
+typedef std::vector<hambourgeois::RectI> TTileset;
+typedef std::map<std::string, TLayer> Tilemap;
 
 class SdlGraphics : public hambourgeois::IGraphics {
 public:
@@ -43,7 +48,18 @@ public:
 
 	virtual void GetWindowSize(int* w, int* h) override;
 
+	void LoadTileset(const std::string& image, int tileW, int tileH, int col, int count);
+
+	void DrawTiles(int tileW, int tileH, size_t tileset);
+
 private:
 	std::unordered_map<size_t, SDL_Texture*> textureCache;
 	std::unordered_map<size_t, _TTF_Font*> fontCache;
+
+	std::unordered_map<size_t, SDL_Texture*> tilesetCache;
+	std::unordered_map<size_t, TTileset> tilesetRectCache;
+
+	TTileset tileset;
+	Tilemap tilemap;
+	TLayer layer;
 };
