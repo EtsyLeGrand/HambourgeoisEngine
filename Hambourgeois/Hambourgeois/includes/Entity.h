@@ -1,73 +1,139 @@
 #pragma once
-
+#include <string>
 #include <map>
 #include <vector>
-
+#include <Component.h>
 #include <IUpdatable.h>
 #include <IDrawable.h>
-#include <Engine.h>
-#include <Component.h>
+#include <Rect.h>
 
-class Entity final
+namespace hambourgeois
 {
-public: 
-	Entity(const std::string& name) { this->name = name; }
-	virtual ~Entity() = default;
+    class Entity final
+    {
+    public:
+        virtual ~Entity() = default;
+        Entity(const std::string& name);
 
-	float x() { return transform[0]; };
-	float y() { return transform[1]; };
-	float w() { return transform[2]; };
-	float h() { return transform[3]; };
+        virtual void Start();
+        virtual void Update(float dt);
+        virtual void Draw();
+        virtual void Destroy();
 
-	void Set_X(float x) { transform[0] = x; }
-	void Set_Y(float y) { transform[1] = y; }
-	void Set_W(float w) { transform[2] = w; }
-	void Set_H(float h) { transform[3] = h; }
+        std::string& GetName() { return name; }
 
-	virtual void Start() {}
-	virtual void Update(float dt);
-	virtual void Draw();
-	virtual void Destroy() {}
+        void SetPosition(float _x, float _y)
+        {
+            x = _x;
+            y = _y;
+        }
 
-	template<class T> bool GetComponent(T** cmp)
-	{
-		const type_info* type = &typeid(**cmp);
-		if (components.find(type) != components.end())
-		{
-			*cmp = components.find(type);
-		}
-	}
+        void SetSize(float w, float h)
+        {
+            width = w;
+            height = h;
+        }
 
-	template<typename T> T* AddComponent()
-	{
-		T* cmp = new T(this);
-		const type_info* type = &typeid(*cmp);
-		if (components.count(type) == 0)
-		{
-			auto temp = dynamic_cast<IDrawable*>(cmp);
-			if (temp != nullptr)
-			{
-				drawables.push_back(temp);
-			}
+        void SetRotation(double _angle)
+        {
+            angle = _angle;
+        }
 
-			auto temp2 = dynamic_cast<IUpdatable*>(cmp);
-			if (temp2 != nullptr)
-			{
-				updatables.push_back(temp2);
-			}
+        void Translate(float dx, float dy)
+        {
+            x += dx;
+            y += dy;
+        }
 
-			components.emplace(type, cmp);
-			return cmp;
-		}
-	}
+        void Scale(float _dw, float _dh)
+        {
+            width *= _dw;
+            height *= _dh;
+        }
 
-	std::string& GetName() { return name; }
+        void Rotate(double _angle)
+        {
+            angle += _angle;
+        }
 
-private:
-	float transform[4];
-	std::string name;
+        void GetPosition(float* _x, float* _y)
+        {
+            *_x = x;
+            *_y = y;
+        }
 
-	std::map<const type_info*, Component*> components;
-	std::vector<IUpdatable*> updatables;
-	std::vector<IDrawable*> drawables;
-};
+        float GetX() const { return x; }
+        float GetY() const { return y; }
+
+        void GetSize(float* _w, float* _h)
+        {
+            *_w = width;
+            *_h = height;
+        }
+
+        float GetWidth() const { return width; }
+        float GetHeight() const { return height; }
+
+        double GetRotation() const { return angle; }
+
+        void GetRect(RectF* rect)
+        {
+            *rect = {
+                x, y,
+                width, height
+            };
+        }
+
+        template <typename T>
+        T* AddComponent()
+        {
+            T* component = new T(this);
+            const type_info* type = &typeid(*component);
+            if (componentsByType.count(type) == 0)
+            {
+                componentsByType.emplace(type, component);
+
+                auto _updatable = dynamic_cast<IUpdatable*>(component);
+                if (_updatable != nullptr)
+                {
+                    updatableComponents.emplace_back(_updatable);
+                }
+
+                auto _drawable = dynamic_cast<IDrawable*>(component);
+                if (_drawable != nullptr)
+                {
+                    drawableComponents.emplace_back(_drawable);
+                }
+
+                return component;
+            }
+
+            return nullptr;
+        }
+
+        template <typename T>
+        T* GetComponent()
+        {
+            const type_info* type = &typeid(T);
+            if (componentsByType.count(type) > 0)
+            {
+                return static_cast<T*>(componentsByType[type]);
+            }
+
+            return nullptr;
+        }
+
+    protected:
+        std::string name;
+
+        std::map<const type_info*, Component*> componentsByType;
+        std::vector<IUpdatable*> updatableComponents;
+        std::vector<IDrawable*> drawableComponents;
+
+        float x = 0.0f;
+        float y = 0.0f;
+        double angle = 0.0;
+        float width = 1.0f;
+        float height = 1.0f;
+    };
+}

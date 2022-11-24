@@ -144,14 +144,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="includes\Atlas.h" />
+    <ClInclude Include="includes\BaseScene.h" />
     <ClInclude Include="includes\Color.h" />
     <ClInclude Include="includes\Component.h" />
     <ClInclude Include="includes\ConsoleLogger.h" />
     <ClInclude Include="includes\Engine.h" />
     <ClInclude Include="includes\Entity.h" />
     <ClInclude Include="includes\FileLogger.h" />
+    <ClInclude Include="includes\IAudio.h" />
     <ClInclude Include="includes\IDrawable.h" />
+    <ClInclude Include="includes\IGraphics.h" />
+    <ClInclude Include="includes\IInput.h" />
+    <ClInclude Include="includes\ILogger.h" />
+    <ClInclude Include="includes\IServiceProvider.h" />
     <ClInclude Include="includes\IUpdatable.h" />
+    <ClInclude Include="includes\IWorld.h" />
     <ClInclude Include="includes\Rect.h" />
     <ClInclude Include="includes\SdlAudio.h" />
     <ClInclude Include="includes\SdlGraphics.h" />
@@ -161,15 +168,14 @@
     <ClInclude Include="includes\WorldService.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="includes\Scene.h" />
     <ClCompile Include="sources\Atlas.cpp" />
+    <ClCompile Include="sources\BaseScene.cpp" />
     <ClCompile Include="sources\Color.cpp" />
     <ClCompile Include="sources\Component.cpp" />
     <ClCompile Include="sources\ConsoleLogger.cpp" />
     <ClCompile Include="sources\Engine.cpp" />
     <ClCompile Include="sources\Entity.cpp" />
     <ClCompile Include="sources\FileLogger.cpp" />
-    <ClCompile Include="sources\Scene.cpp" />
     <ClCompile Include="sources\SdlAudio.cpp" />
     <ClCompile Include="sources\SdlGraphics.cpp" />
     <ClCompile Include="sources\SdlInput.cpp" />

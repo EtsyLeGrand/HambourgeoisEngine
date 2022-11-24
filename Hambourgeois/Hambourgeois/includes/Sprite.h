@@ -1,21 +1,33 @@
 #pragma once
-
 #include <Component.h>
 #include <IDrawable.h>
+#include <Color.h>
+#include <Rect.h>
+#include <string>
 
-class Sprite : public Component, public IDrawable
+namespace hambourgeois
 {
-public:
-	Sprite(Entity* entity);
-	virtual void SetTexture(const std::string& filename);
-	hambourgeois::RectI src = { 0, 0, 0, 0 };
-	hambourgeois::RectF dest = { 0, 0, 1, 1 };
-	hambourgeois::Flip flip = { 0, 0 };
-	hambourgeois::Color color = hambourgeois::Color::WHITE;
+    class Sprite : public Component, public IDrawable
+    {
+    public:
+        virtual ~Sprite() = default;
+        Sprite();
+        Sprite(Entity* parent);
 
-protected:
-	size_t texture_id = NULL;
+        virtual void Draw() override;
+        virtual void Load(const std::string& filename);
 
-private:
-	virtual void Draw() override;
-};
+        void SetColor(const Color& color);
+        void SetFlip(bool h, bool v);
+        bool GetFlipH() const { return flip.h; }
+        bool GetFlipV() const { return flip.v; }
+
+    private:
+        size_t textureId = 0;
+        Color color{ 255, 255, 255, 255 };
+        Flip flip;
+
+    protected:
+        RectI source{ 0, 0, 0, 0 };
+    };
+}

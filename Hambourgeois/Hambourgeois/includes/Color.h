@@ -9,6 +9,7 @@ namespace hambourgeois
     public:
         Color(uchar red, uchar green, uchar blue);
         Color(uchar red, uchar green, uchar blue, uchar alpha);
+        void Set(const Color& c);
 
         static const Color& MAROON;
         static const Color& DARKRED;

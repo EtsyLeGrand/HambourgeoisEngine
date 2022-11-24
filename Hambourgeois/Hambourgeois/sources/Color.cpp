@@ -10,6 +10,14 @@ hambourgeois::Color::Color(uchar red, uchar green, uchar blue, uchar alpha) :
 {
 }
 
+void hambourgeois::Color::Set(const Color& c)
+{
+    red = c.red;
+    green = c.green;
+    blue = c.blue;
+    alpha = c.alpha;
+}
+
 const hambourgeois::Color& hambourgeois::Color::MAROON = hambourgeois::Color(128, 0, 0);
 const hambourgeois::Color& hambourgeois::Color::DARKRED = hambourgeois::Color(139, 0, 0);
 const hambourgeois::Color& hambourgeois::Color::BROWN = hambourgeois::Color(165, 42, 42);

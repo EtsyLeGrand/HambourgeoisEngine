@@ -1,36 +1,29 @@
 #include <Atlas.h>
-#include <Entity.h>
-
-Atlas::Atlas(Entity* entity): Sprite(entity)
+#include <Engine.h>
+using namespace hambourgeois;
+Atlas::Atlas() : Atlas(nullptr)
 {
-	this->entity = entity;
+}
+
+Atlas::Atlas(Entity* parent) : Sprite(parent)
+{
 }
 
 void Atlas::AddFrame(const std::string& name, int x, int y, int w, int h)
 {
-	if (frameCache.find(name) == frameCache.end()) // not in cache
-	{
-		hambourgeois::RectI rect = { x, y, w, h };
-		frameCache.insert(std::make_pair(name, rect));
-	}	
+    frames.emplace(name, RectI{ x, y, w, h });
+
+    if (frames.size() == 1)
+    {
+        SetFrame(name);
+    }
 }
 
 void Atlas::SetFrame(const std::string& name)
 {
-	if (frameCache.find(name) != frameCache.end()) // in cache
-	{
-		frame = frameCache[name];
-		dest.w = frame.w;
-		dest.h = frame.h;
-	}
-}
-
-void Atlas::Draw()
-{
-	dest.x = this->entity->x();
-	dest.y = this->entity->y();
-	if (texture_id != NULL)
-	{
-		Graphics().DrawTexture(texture_id, frame, dest, 0, flip, color);
-	}
+    RectI _src = frames[name];
+    source.x = _src.x;
+    source.y = _src.y;
+    source.w = _src.w;
+    source.h = _src.h;
 }

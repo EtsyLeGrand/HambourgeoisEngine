@@ -1,26 +1,34 @@
 #pragma once
-#include <Engine.h>
+    
 
-class Entity;
 
-class Component
+namespace hambourgeois
 {
-public:
-	virtual ~Component() = default;
-	Component();
-	Component(Entity* parent);
+    class Entity;
+    class IInput;
+    class ILogger;
+    class IGraphics;
+    class IAudio;
+    class IWorld;
 
-	virtual void Start() {}
-	virtual void Update() {}
-	virtual void Draw() {}
-	virtual void Destroy() {}
+    class Component
+    {
+    public:
+        virtual ~Component() = default;
+        Component();
+        Component(Entity* parent);
 
-protected:
-	Entity* entity = nullptr;
+        virtual void Start() {}
+        virtual void Destroy() {}
 
-	hambourgeois::IInput& Input() const;
-	hambourgeois::ILogger& Logger() const;
-	hambourgeois::IGraphics& Graphics() const;
-	hambourgeois::IServiceProvider& ServiceProvider() const;
-	hambourgeois::IAudio& Audio() const;
-};
+    protected:
+        void Exit();
+        IInput& Input() const;
+        ILogger& Logger() const;
+        IGraphics& Graphics() const;
+        IAudio& Audio() const;
+        IWorld& World() const;
+
+        Entity* entity = nullptr;
+    };
+}

@@ -1,30 +1,41 @@
-#include <Sprite.h>
-#include <Entity.h>
+#include "Sprite.h"
+#include "Engine.h"
+#include "Entity.h"
+using namespace hambourgeois;
 
-Sprite::Sprite(Entity* entity) : Component(entity)
+
+hambourgeois::Sprite::Sprite() : Sprite(nullptr)
 {
-	this->entity = entity;
-	dest.x = this->entity->x();
-	dest.y = this->entity->y();
-	dest.w = this->entity->w();;
-	dest.h = this->entity->h();
 }
 
-void Sprite::SetTexture(const std::string& filename)
+hambourgeois::Sprite::Sprite(Entity* parent) : Component(parent)
 {
-	texture_id = Graphics().LoadTexture(filename);
-	if (texture_id != NULL)
-	{
-		Graphics().GetTextureSize(texture_id, &src.w, &src.h);
-	}
+    flip.h = false;
+    flip.v = false;
 }
 
-void Sprite::Draw()
+void hambourgeois::Sprite::Draw()
 {
-	dest.x = this->entity->x();
-	dest.y = this->entity->y();
-	if (texture_id != NULL)
-	{
-		Graphics().DrawTexture(texture_id, src, dest, 0, flip, color);
-	}
+    double _rot = entity->GetRotation();
+    RectF _dst;
+    entity->GetRect(&_dst);
+
+    Graphics().DrawTexture(textureId, source, _dst, _rot, flip, color);
+}
+
+void hambourgeois::Sprite::Load(const std::string& filename)
+{
+    textureId = Graphics().LoadTexture(filename);
+    Graphics().GetTextureSize(textureId, &source.w, &source.h);
+}
+
+void hambourgeois::Sprite::SetColor(const Color& color)
+{
+    //color.Set(color);
+}
+
+void hambourgeois::Sprite::SetFlip(bool h, bool v)
+{
+    flip.h = h;
+    flip.v = v;
 }

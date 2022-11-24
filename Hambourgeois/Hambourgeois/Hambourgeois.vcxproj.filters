@@ -63,6 +63,27 @@
     <ClInclude Include="includes\Atlas.h">
       <Filter>includes</Filter>
     </ClInclude>
+    <ClInclude Include="includes\BaseScene.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IWorld.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IInput.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ILogger.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IGraphics.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IAudio.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IServiceProvider.h">
+      <Filter>includes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp">
@@ -104,10 +125,7 @@
     <ClCompile Include="sources\Atlas.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="includes\Scene.h">
-      <Filter>includes</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Scene.cpp">
+    <ClCompile Include="sources\BaseScene.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

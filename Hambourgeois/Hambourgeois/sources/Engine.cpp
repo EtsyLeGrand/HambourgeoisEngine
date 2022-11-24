@@ -1,7 +1,5 @@
 #include <Engine.h>
-#include <Scene.h>
-#include <Color.h>
-#include <Rect.h>
+#include <BaseScene.h>
 
 #include <time.h>
 #include <Windows.h>
@@ -219,7 +217,7 @@ void hambourgeois::Engine::Shutdown()
 
 	if (world != nullptr)
 	{
-		world->Unload();
+		world->Shutdown();
 		delete world;
 	}
 		

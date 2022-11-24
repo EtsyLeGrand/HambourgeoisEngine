@@ -3,16 +3,16 @@
 
 #include <windows.h>
 #include <Engine.h>
-#include <Scene.h>
+#include <BaseScene.h>
 #include <Sprite.h>
 
-class MainMenu : public Scene {
+class MainMenu : public hambourgeois::BaseScene {
 public:
 	virtual void Load();
 	virtual void Update(float dt);
 };
 
-class Level1 : public Scene {
+class Level1 : public hambourgeois::BaseScene {
 public:
 	virtual void Load();
 	virtual void Update(float dt);
@@ -54,11 +54,12 @@ void Level1::Update(float dt)
 void MainMenu::Load()
 {
 	hambourgeois::Engine& engine = hambourgeois::Engine::Get();
-	Entity* entite = engine.World().Create("dounki");
-	entite->Set_X(25);
-	entite->Set_Y(25);
-	Sprite* sprite = entite->AddComponent<Sprite>();
-	sprite->SetTexture("ressources/images/dk.png");
+	hambourgeois::Entity* entite;
+	entite = Instantiate("Douneki Koungne");
+	entite->SetPosition(100, 125);
+	entite->SetSize(300, 80);
+	hambourgeois::Sprite* sprite = entite->AddComponent<hambourgeois::Sprite>();
+	sprite->Load("ressources/images/dk.png");
 }
 
 void MainMenu::Update(float dt)

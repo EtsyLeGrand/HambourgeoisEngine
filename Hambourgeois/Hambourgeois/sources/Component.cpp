@@ -1,36 +1,40 @@
-#include <Component.h>
-#include <Entity.h>
+#include "Component.h"
+#include <Engine.h>
 
-Component::Component()
+hambourgeois::Component::Component() : Component(nullptr)
 {
 }
 
-Component::Component(Entity* parent)
+hambourgeois::Component::Component(Entity* parent) : entity(parent)
 {
-	entity = parent;
 }
 
-hambourgeois::IInput& Component::Input() const
+void hambourgeois::Component::Exit()
 {
-	return hambourgeois::Engine::Get().Input();
+    Engine::Get().Exit();
 }
 
-hambourgeois::ILogger& Component::Logger() const
+hambourgeois::IInput& hambourgeois::Component::Input() const
 {
-	return hambourgeois::Engine::Get().Logger();
+    return Engine::Get().Input();
 }
 
-hambourgeois::IGraphics& Component::Graphics() const
+hambourgeois::ILogger& hambourgeois::Component::Logger() const
 {
-	return hambourgeois::Engine::Get().Graphics();
+    return Engine::Get().Logger();
 }
 
-hambourgeois::IServiceProvider& Component::ServiceProvider() const
+hambourgeois::IGraphics& hambourgeois::Component::Graphics() const
 {
-	return hambourgeois::Engine::Get().ServiceProvider();
+    return Engine::Get().Graphics();
 }
 
-hambourgeois::IAudio& Component::Audio() const
+hambourgeois::IAudio& hambourgeois::Component::Audio() const
 {
-	return hambourgeois::Engine::Get().Audio();
+    return Engine::Get().Audio();
+}
+
+hambourgeois::IWorld& hambourgeois::Component::World() const
+{
+    return Engine::Get().World();
 }

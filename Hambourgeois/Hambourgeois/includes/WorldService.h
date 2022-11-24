@@ -1,29 +1,40 @@
 #pragma once
 
-#include <Scene.h>
+#include <vector>
+#include <string>
 #include <map>
+#include "IWorld.h"
 
-class Entity;
+namespace hambourgeois
+{
+    class Entity;
+    class BaseScene;
+    class WorldService : public IWorld
+    {
+    public:
+        virtual ~WorldService() = default;
 
-class WorldService : public hambourgeois::IWorld {
-public:
-	virtual ~WorldService() override;
-	virtual void Update(float dt);
-	virtual void Draw();
-	virtual void Add(Entity* entity);
-	virtual void Remove(Entity* entity);
-	virtual Entity* Find(const std::string& name);
-	virtual Entity* Create(const std::string& name);
+        virtual Entity* Create(const std::string& name) override;
+        virtual void Update(float dt) override;
+        virtual void Draw() override;
+        virtual void Shutdown() override;
+        virtual Entity* Find(const std::string& name) override;
+        virtual void Remove(const std::string& name) override;
+        virtual void Remove(Entity* entity) override;
+        virtual void Load(const std::string& sceneName) override;
+        virtual void Unload() override;
+        virtual void Register(const std::string& sceneName, BaseScene* scene) override;
 
-	virtual void Load(const std::string& scene);
-	virtual void Register(const std::string& name, Scene* scene);
-	virtual void Unload();
+    private:
+        void CleanEntities();
+        void StartEntities();
+        void UpdateLoadScene();
 
-private:
-
-	std::vector<Entity*> entitiesInWorld;
-	std::map<std::string, Entity*> entityMap;
-
-	std::map<std::string, Scene*> scenes;
-	Scene* currentScene = nullptr;
-};
+        std::string sceneToLoad;
+        std::vector<Entity*> entityInWorld;
+        std::vector<Entity*> entityToRemove;
+        std::vector<Entity*> entityToStart;
+        std::map<std::string, Entity*> entityMap;
+        std::map<std::string, BaseScene*> sceneRegistry;
+    };
+}

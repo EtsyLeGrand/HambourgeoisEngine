@@ -1,19 +1,24 @@
 #pragma once
-
 #include <Sprite.h>
 #include <map>
+#include <string>
+#include <Rect.h>
 
-class Atlas : public Sprite
+namespace hambourgeois
 {
-public:
-	Atlas(Entity* entity);
-	void AddFrame(const std::string& name, int x, int y, int w, int h);
-	void SetFrame(const std::string& name);
+    class Entity;
 
-protected:
-	std::map<const std::string, hambourgeois::RectI> frameCache;
+    class Atlas final : public Sprite
+    {
+    public:
+        virtual ~Atlas() = default;
+        Atlas();
+        Atlas(Entity* parent);
 
-private:
-	hambourgeois::RectI frame;
-	virtual void Draw() override;
-};
+        void AddFrame(const std::string& name, int x, int y, int w, int h);
+        void SetFrame(const std::string& name);
+
+    private:
+        std::map<std::string, RectI> frames;
+    };
+}

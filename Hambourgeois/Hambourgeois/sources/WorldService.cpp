@@ -1,97 +1,189 @@
 #include <WorldService.h>
-#include <Entity.h>
+#include <BaseScene.h>
+#include <Engine.h>
 
-Entity* WorldService::Create(const std::string& name)
+hambourgeois::Entity* hambourgeois::WorldService::Create(const std::string& name)
 {
-	Entity* e = new Entity(name);
-	Add(e);
-	return e;
+    Entity* newEntity = new Entity(name);
+
+    if (entityMap.count(name) == 0)
+    {
+        entityToStart.emplace_back(newEntity);
+        return newEntity;
+    }
+
+    return nullptr;
 }
 
-WorldService::~WorldService()
+void hambourgeois::WorldService::Update(float dt)
 {
-	for (auto scene : scenes)
-	{
-		delete scene.second;
-	}
+    for (auto entity : entityInWorld)
+    {
+        entity->Update(dt);
+    }
+
+    UpdateLoadScene();
+
+    StartEntities();
+    CleanEntities();
 }
 
-void WorldService::Update(float dt)
+void hambourgeois::WorldService::Draw()
 {
-	for (auto entity : entitiesInWorld) {
-		entity->Update(dt); 
-	}
+    for (auto entity : entityInWorld)
+    {
+        entity->Draw();
+    }
 }
 
-void WorldService::Draw()
+void hambourgeois::WorldService::Remove(Entity* entity)
 {
-	for (auto entity : entitiesInWorld) {
-		entity->Draw();
-	}
+    if (entity != nullptr)
+    {
+        Remove(entity->GetName());
+    }
 }
 
-void WorldService::Add(Entity* entity)
+void hambourgeois::WorldService::Remove(const std::string& name)
 {
-	entitiesInWorld.emplace_back(entity);
-	entityMap.emplace(entity->GetName(), entity);
+    if (entityMap.count(name) > 0)
+    {
+        for (size_t i = 0; i < entityInWorld.size(); i++)
+        {
+            Entity* entity = entityInWorld[i];
+            if (entity->GetName() == name)
+            {
+                entityToRemove.emplace_back(entity);
+                break;
+            }
+        }
+    }
 }
 
-void WorldService::Remove(Entity* entity)
+hambourgeois::Entity* hambourgeois::WorldService::Find(const std::string& name)
 {
-	for (auto it = entityMap.begin(); it != entityMap.end(); ++it)
-	{
-		if (it->second->GetName() == entity->GetName()) {
-			entityMap.erase(it);
-			it--;
-		}
-	}
+    if (entityMap.count(name) > 0)
+    {
+        return entityMap[name];
+    }
 
-	for (auto it = entitiesInWorld.begin(); it != entitiesInWorld.end(); ++it)
-	{
-		if ((*it)->GetName() == entity->GetName()) {
-			entitiesInWorld.erase(it);
-			it--;
-		}
-	}
+    return nullptr;
 }
 
-Entity* WorldService::Find(const std::string& name)
+void hambourgeois::WorldService::Load(const std::string& scene)
 {
-	if (entityMap.count(name) > 0) 
-	{
-		return entityMap[name];
-	}
-	return nullptr;
+    if (sceneRegistry.count(scene) > 0)
+    {
+        sceneToLoad = scene;
+    }
 }
 
-void WorldService::Load(const std::string& scene)
+void hambourgeois::WorldService::Register(const std::string& name, BaseScene* scene)
 {
-	if (scenes.count(scene) > 0)
-	{
-		Unload();
-		currentScene = scenes[scene];
-		scenes[scene]->Load();
-	}
+    if (sceneRegistry.count(name) == 0)
+    {
+        sceneRegistry[name] = scene;
+    }
 }
 
-void WorldService::Register(const std::string& name, Scene* scene)
+void hambourgeois::WorldService::Unload()
 {
-	if (scenes.count(name) == 0)
-	{
-		scenes[name] = scene;
-	}
+    for (auto entity : entityInWorld)
+    {
+        entity->Destroy();
+        delete entity;
+    }
+
+    for (auto entity : entityToStart)
+    {
+        delete entity;
+    }
+
+    for (auto entity : entityToRemove)
+    {
+        entity->Destroy();
+        delete entity;
+    }
+
+    entityInWorld.clear();
+    entityMap.clear();
+    entityToStart.clear();
+    entityToRemove.clear();
 }
 
-void WorldService::Unload()
+void hambourgeois::WorldService::Shutdown()
 {
-	if (currentScene != nullptr)
-	{
-		for (auto entity : entitiesInWorld) {
-			entity->Destroy();
-			delete entity;
-		}
+    Unload();
 
-		entitiesInWorld.clear();
-		entityMap.clear();
-	}
+    for (auto scene : sceneRegistry)
+    {
+        delete scene.second;
+    }
+
+    sceneRegistry.clear();
+}
+
+void hambourgeois::WorldService::CleanEntities()
+{
+    if (entityToRemove.size() > 0)
+    {
+        std::vector<Entity*> _trash = entityToRemove;
+        entityToRemove.clear();
+
+        for (auto entity : _trash)
+        {
+            entityMap.erase(entity->GetName());
+            entity->Destroy();
+
+            for (auto it = entityInWorld.begin(); it != entityInWorld.end(); ++it)
+            {
+                if (entity == *it)
+                {
+                    entityInWorld.erase(it);
+                    delete entity;
+                    break;
+                }
+            }
+        }
+
+        _trash.clear();
+    }
+}
+
+void hambourgeois::WorldService::StartEntities()
+{
+    if (entityToStart.size() > 0)
+    {
+        std::vector<Entity*> starting = entityToStart;
+        entityToStart.clear();
+
+        for (auto entity : starting)
+        {
+            if (entityMap.count(entity->GetName()) > 0)
+            {
+                Engine::Get().Logger().Log("Not adding entity with same name");
+                continue;
+            }
+
+            entityInWorld.emplace_back(entity);
+            entityMap.emplace(entity->GetName(), entity);
+        }
+
+        for (auto entity : starting)
+        {
+            entity->Start();
+        }
+
+        starting.clear();
+    }
+}
+
+void hambourgeois::WorldService::UpdateLoadScene()
+{
+    if (!sceneToLoad.empty())
+    {
+        Unload();
+        sceneRegistry[sceneToLoad]->Load();
+        sceneToLoad.clear();
+    }
 }
