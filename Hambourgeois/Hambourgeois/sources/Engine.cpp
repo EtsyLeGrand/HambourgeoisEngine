@@ -220,7 +220,6 @@ void hambourgeois::Engine::Shutdown()
 		world->Shutdown();
 		delete world;
 	}
-		
 
 	delete engine;
 	engine = nullptr;

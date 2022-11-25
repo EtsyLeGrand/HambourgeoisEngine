@@ -54,12 +54,15 @@ void Level1::Update(float dt)
 void MainMenu::Load()
 {
 	hambourgeois::Engine& engine = hambourgeois::Engine::Get();
-	hambourgeois::Entity* entite;
-	entite = Instantiate("Douneki Koungne");
-	entite->SetPosition(100, 125);
-	entite->SetSize(300, 80);
-	hambourgeois::Sprite* sprite = entite->AddComponent<hambourgeois::Sprite>();
+
+	hambourgeois::Entity* dk;
+	dk = Instantiate("Douneki Koungne");
+	dk->SetPosition(100, 125);
+	dk->SetSize(300, 80);
+	hambourgeois::Sprite* sprite = dk->AddComponent<hambourgeois::Sprite>();
 	sprite->Load("ressources/images/dk.png");
+
+
 }
 
 void MainMenu::Update(float dt)
