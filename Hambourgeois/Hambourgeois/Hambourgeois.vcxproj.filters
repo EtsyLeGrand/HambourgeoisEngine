@@ -13,6 +13,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="includes\Components">
+      <UniqueIdentifier>{f659c9ce-c44e-4fdc-a567-79a918d806a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Components">
+      <UniqueIdentifier>{a0339d3f-7486-490b-8993-13511d9ed06a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\Engine.h">
@@ -57,12 +63,6 @@
     <ClInclude Include="includes\IDrawable.h">
       <Filter>includes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\Sprite.h">
-      <Filter>includes</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\Atlas.h">
-      <Filter>includes</Filter>
-    </ClInclude>
     <ClInclude Include="includes\BaseScene.h">
       <Filter>includes</Filter>
     </ClInclude>
@@ -83,6 +83,30 @@
     </ClInclude>
     <ClInclude Include="includes\IServiceProvider.h">
       <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Animation.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Atlas.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Script.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Sprite.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\PhysicsObject.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\EKey.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\MarioController.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Canvas.h">
+      <Filter>includes\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,14 +143,29 @@
     <ClCompile Include="sources\Component.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Sprite.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Atlas.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
     <ClCompile Include="sources\BaseScene.cpp">
       <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Animation.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Atlas.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Script.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Sprite.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\PhysicsObject.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\MarioController.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Canvas.cpp">
+      <Filter>sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -143,11 +143,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\Animation.h" />
     <ClInclude Include="includes\Atlas.h" />
     <ClInclude Include="includes\BaseScene.h" />
+    <ClInclude Include="includes\Canvas.h" />
     <ClInclude Include="includes\Color.h" />
     <ClInclude Include="includes\Component.h" />
     <ClInclude Include="includes\ConsoleLogger.h" />
+    <ClInclude Include="includes\MarioController.h" />
+    <ClInclude Include="includes\EKey.h" />
     <ClInclude Include="includes\Engine.h" />
     <ClInclude Include="includes\Entity.h" />
     <ClInclude Include="includes\FileLogger.h" />
@@ -159,7 +163,9 @@
     <ClInclude Include="includes\IServiceProvider.h" />
     <ClInclude Include="includes\IUpdatable.h" />
     <ClInclude Include="includes\IWorld.h" />
+    <ClInclude Include="includes\PhysicsObject.h" />
     <ClInclude Include="includes\Rect.h" />
+    <ClInclude Include="includes\Script.h" />
     <ClInclude Include="includes\SdlAudio.h" />
     <ClInclude Include="includes\SdlGraphics.h" />
     <ClInclude Include="includes\SdlInput.h" />
@@ -168,14 +174,19 @@
     <ClInclude Include="includes\WorldService.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\Animation.cpp" />
     <ClCompile Include="sources\Atlas.cpp" />
     <ClCompile Include="sources\BaseScene.cpp" />
+    <ClCompile Include="sources\Canvas.cpp" />
     <ClCompile Include="sources\Color.cpp" />
     <ClCompile Include="sources\Component.cpp" />
     <ClCompile Include="sources\ConsoleLogger.cpp" />
     <ClCompile Include="sources\Engine.cpp" />
     <ClCompile Include="sources\Entity.cpp" />
     <ClCompile Include="sources\FileLogger.cpp" />
+    <ClCompile Include="sources\MarioController.cpp" />
+    <ClCompile Include="sources\PhysicsObject.cpp" />
+    <ClCompile Include="sources\Script.cpp" />
     <ClCompile Include="sources\SdlAudio.cpp" />
     <ClCompile Include="sources\SdlGraphics.cpp" />
     <ClCompile Include="sources\SdlInput.cpp" />

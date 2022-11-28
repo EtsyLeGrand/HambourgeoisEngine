@@ -29,6 +29,7 @@ namespace hambourgeois
         void AddClip(const std::string& name, int start, int count, float delay);
         void Stop();
         void Play(const std::string& name, bool loop);
+        void SetLoop(bool isLoop) { loop = isLoop; }
 
     private:
         void UpdateFrame();

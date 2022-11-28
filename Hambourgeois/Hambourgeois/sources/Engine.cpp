@@ -22,16 +22,11 @@
 static unsigned char const* _keys = nullptr;
 static bool isRunning = false;
 
-static size_t dkid;
 static size_t fontid;
 static size_t soundid;
-static size_t musicid;
 
 static const float TARGET_FPS = 60.0f;
 static const float MS_PER_FRAME = (1000 / TARGET_FPS);
-
-static float xPos = 0;
-static float yPos = 0;
 
 static hambourgeois::Engine* engine;
 
@@ -95,13 +90,13 @@ void hambourgeois::Engine::Start()
 {
 	isRunning = true;
 
-	dkid = graphics->LoadTexture("ressources/images/dk.png");
 	fontid = graphics->LoadFont("ressources/fonts/AldotheApache.ttf", 100);
 	soundid = audio->LoadSound("ressources/audio/coin.mp3");
-	musicid = audio->LoadMusic("ressources/audio/barbies.wav");
+
+	audio->SetVolume(soundid, 5);
 
 	audio->PlaySFX(soundid);
-	audio->PlayMusic(musicid);
+	
 
 	clock_t lastTime = clock();
 
@@ -137,22 +132,6 @@ void hambourgeois::Engine::Update(float dt)
 {
 	if (input != nullptr)
 	{
-		if (input->IsKeyDown(SDL_SCANCODE_W)) {
-			yPos -= 100 * dt;
-			logger->Log("W down!");
-		}
-		if (input->IsKeyDown(SDL_SCANCODE_A)) {
-			xPos -= 100 * dt;
-			logger->Log("A down!");
-		}
-		if (input->IsKeyDown(SDL_SCANCODE_S)) {
-			yPos += 100 * dt;
-			logger->Log("S down!");
-		}
-		if (input->IsKeyDown(SDL_SCANCODE_D)) {
-			xPos += 100 * dt;
-			logger->Log("D down!");
-		}
 		if (input->IsKeyDown(SDL_SCANCODE_ESCAPE)) {
 			logger->Log("Exiting with keypress!");
 			Exit();
@@ -176,13 +155,9 @@ void hambourgeois::Engine::Render()
 	RectF destRect = { 0, 0, 88, 64 };
 	Flip noFlip, flip = { false, false };
 	
-	graphics->DrawTexture(dkid, initialRect, destRect, 0, noFlip, Color::WHITE);
 	graphics->SetColor(Color::RED);
 	
-	
-	RectF rect = { static_cast<float>((w / 2 - 25) + xPos), static_cast<float>((h / 2 - 25) + yPos), 50, 50 };
 
-	graphics->FillRect(rect, Color::ROSYBROWN);
 	graphics->DrawLine(static_cast<float>(0), static_cast<float>(0),
 		static_cast<float>(w), static_cast<float>(h), Color::ANTIQUEWHITE);
 	graphics->DrawString("End gynez", fontid, static_cast<float>(w / 2 - 300), static_cast<float>(h / 2 - 200), Color::WHITE);
