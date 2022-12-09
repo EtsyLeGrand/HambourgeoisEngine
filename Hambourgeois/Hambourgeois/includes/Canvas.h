@@ -30,6 +30,8 @@ namespace hambourgeois
         void EditText(const std::string& id, std::string text, size_t fontId,
             float x, float y, const hambourgeois::Color color);
 
+        void EditText(const std::string& id, std::string text);
+
         void RemoveText(const std::string& id);
 
     private:

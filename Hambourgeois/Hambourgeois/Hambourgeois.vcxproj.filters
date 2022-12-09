@@ -108,6 +108,21 @@
     <ClInclude Include="includes\Canvas.h">
       <Filter>includes\Components</Filter>
     </ClInclude>
+    <ClInclude Include="includes\ICollisions.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Collisions.h">
+      <Filter>includes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Collider.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\LineCollider.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\BoxCollider.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp">
@@ -165,6 +180,18 @@
       <Filter>sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="sources\Canvas.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Collisions.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Collider.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\BoxCollider.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\LineCollider.cpp">
       <Filter>sources\Components</Filter>
     </ClCompile>
   </ItemGroup>

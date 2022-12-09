@@ -65,6 +65,8 @@ namespace hambourgeois
         float GetX() const { return x; }
         float GetY() const { return y; }
 
+        
+
         void GetSize(float* _w, float* _h)
         {
             *_w = width;
@@ -82,6 +84,12 @@ namespace hambourgeois
                 x, y,
                 width, height
             };
+        }
+
+        RectF GetRect()
+        {
+            RectF r = { x, y, width, height };
+            return r;
         }
 
         template <typename T>

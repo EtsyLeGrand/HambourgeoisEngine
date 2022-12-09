@@ -35,6 +35,13 @@ void hambourgeois::Canvas::EditText(const std::string& id, std::string text, siz
 	}
 }
 
+void hambourgeois::Canvas::EditText(const std::string& id, std::string text)
+{
+	if (textMap.find(id) != textMap.end()) {
+		textMap.at(id).text = text;
+	}
+}
+
 void hambourgeois::Canvas::RemoveText(const std::string& id)
 {
 	if (textMap.find(id) != textMap.end()) {

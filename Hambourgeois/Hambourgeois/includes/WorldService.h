@@ -30,7 +30,10 @@ namespace hambourgeois
         void StartEntities();
         void UpdateLoadScene();
 
+        BaseScene* currentScene = nullptr;
+
         std::string sceneToLoad;
+
         std::vector<Entity*> entityInWorld;
         std::vector<Entity*> entityToRemove;
         std::vector<Entity*> entityToStart;

@@ -17,16 +17,19 @@ namespace hambourgeois
 
         virtual void Update(float dt) override;
 
-        bool isRightPressed();
-        bool isLeftPressed();
-        bool isUpPressed();
-        bool isDownPressed();
-        bool isJumpPressed();
+        bool IsRightPressed();
+        bool IsLeftPressed();
+        bool IsUpPressed();
+        bool IsDownPressed();
+        bool IsJumpPressed();
 
-        void setMarioSpeed(float speed) { marioSpeed = speed; }
-        void setJumpForce(float force) { jumpForce = force; }
+        void SetMarioSpeed(float speed) { marioSpeed = speed; }
+        void SetJumpForce(float force) { jumpForce = force; }
 
     private:
+        void HandleMovement();
+        void HandleFloorCollisions();
+
         float marioSpeed;
         float jumpForce;
 

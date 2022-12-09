@@ -10,6 +10,7 @@
 #include <IServiceProvider.h>
 #include <IAudio.h>
 #include <IWorld.h>
+#include <ICollisions.h>
 
 namespace hambourgeois {
 	class Engine final {
@@ -26,6 +27,7 @@ namespace hambourgeois {
 		IServiceProvider& ServiceProvider() const { return *serviceProvider; }
 		IAudio& Audio() const { return *audio; }
 		IWorld& World() const { return *world; };
+		ICollisions& Collisions() const { return *collisions; };
 
 	private:
 		void ProcessInput();
@@ -43,5 +45,6 @@ namespace hambourgeois {
 		IServiceProvider* serviceProvider = nullptr;
 		IAudio* audio = nullptr;
 		IWorld* world = nullptr;
+		ICollisions* collisions = nullptr;
 	};
 }

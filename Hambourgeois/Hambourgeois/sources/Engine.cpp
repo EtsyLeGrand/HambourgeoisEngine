@@ -16,14 +16,11 @@
 #include <SdlAudio.h>
 #include <SdlServiceProvider.h>
 #include <WorldService.h>
+#include <Collisions.h>
 #include <ConsoleLogger.h>
 #include <FileLogger.h>
 
-static unsigned char const* _keys = nullptr;
 static bool isRunning = false;
-
-static size_t fontid;
-static size_t soundid;
 
 static const float TARGET_FPS = 60.0f;
 static const float MS_PER_FRAME = (1000 / TARGET_FPS);
@@ -71,7 +68,7 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 		return false;
 	}
 	else { logger->Log("Audio Service OK"); }
-
+	
 	input = new SdlInput();
 
 	world = new WorldService();
@@ -81,6 +78,8 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 		return false;
 	}
 	else { logger->Log("World Service OK"); }
+
+	collisions = new hambourgeois::Collisions();
 	
 	logger->Log("Initialization complete");
 	return true;
@@ -89,15 +88,7 @@ bool hambourgeois::Engine::Init(const std::string& title, int w, int h)
 void hambourgeois::Engine::Start()
 {
 	isRunning = true;
-
-	fontid = graphics->LoadFont("ressources/fonts/AldotheApache.ttf", 100);
-	soundid = audio->LoadSound("ressources/audio/coin.mp3");
-
-	audio->SetVolume(soundid, 5);
-
-	audio->PlaySFX(soundid);
 	
-
 	clock_t lastTime = clock();
 
 	while (isRunning)
@@ -151,17 +142,6 @@ void hambourgeois::Engine::Render()
 	int w, h;
 	graphics->GetWindowSize(&w, &h);
 
-	RectI initialRect = { 1 + (47 * 0), 1, 44, 32 };
-	RectF destRect = { 0, 0, 88, 64 };
-	Flip noFlip, flip = { false, false };
-	
-	graphics->SetColor(Color::RED);
-	
-
-	graphics->DrawLine(static_cast<float>(0), static_cast<float>(0),
-		static_cast<float>(w), static_cast<float>(h), Color::ANTIQUEWHITE);
-	graphics->DrawString("End gynez", fontid, static_cast<float>(w / 2 - 300), static_cast<float>(h / 2 - 200), Color::WHITE);
-	
 	if (world != nullptr)
 	{
 		world->Draw();
@@ -195,6 +175,9 @@ void hambourgeois::Engine::Shutdown()
 		world->Shutdown();
 		delete world;
 	}
+
+	if (collisions != nullptr)
+		delete collisions;
 
 	delete engine;
 	engine = nullptr;

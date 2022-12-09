@@ -17,15 +17,18 @@ hambourgeois::Entity* hambourgeois::WorldService::Create(const std::string& name
 
 void hambourgeois::WorldService::Update(float dt)
 {
+    UpdateLoadScene();
+    StartEntities();
+
     for (auto entity : entityInWorld)
     {
         entity->Update(dt);
     }
 
-    UpdateLoadScene();
-
-    StartEntities();
+    currentScene->Update(dt);
+    
     CleanEntities();
+    
 }
 
 void hambourgeois::WorldService::Draw()
@@ -74,7 +77,9 @@ void hambourgeois::WorldService::Load(const std::string& scene)
 {
     if (sceneRegistry.count(scene) > 0)
     {
+        Unload();
         sceneToLoad = scene;
+        currentScene = sceneRegistry[sceneToLoad];
     }
 }
 
