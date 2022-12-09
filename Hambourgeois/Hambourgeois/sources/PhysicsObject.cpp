@@ -13,16 +13,19 @@ hambourgeois::PhysicsObject::PhysicsObject(Entity* parent) : Component(parent)
 
 void hambourgeois::PhysicsObject::Update(float dt)
 {
-	float x, y;
-	entity->GetPosition(&x, &y);
-
-	verticalSpeed -= gravity;
-	if (terminalVelocity != -1.0f && verticalSpeed > terminalVelocity)
+	if (enabled)
 	{
-		verticalSpeed = terminalVelocity;
-	}
+		float x, y;
+		entity->GetPosition(&x, &y);
 
-	entity->SetPosition(x + (horizontalSpeed * dt), y + (verticalSpeed * dt));
+		verticalSpeed -= gravity;
+		if (terminalVelocity != -1.0f && verticalSpeed > terminalVelocity)
+		{
+			verticalSpeed = terminalVelocity;
+		}
+
+		entity->SetPosition(x + (horizontalSpeed * dt), y + (verticalSpeed * dt));
+	}
 }
 
 void hambourgeois::PhysicsObject::SetGravity(float g)

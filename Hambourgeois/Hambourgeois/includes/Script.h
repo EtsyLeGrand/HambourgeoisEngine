@@ -3,6 +3,8 @@
 #include <IDrawable.h>
 #include <IUpdatable.h>
 
+// NOT IN USE!!!
+
 namespace hambourgeois {
     class Script : public Component, public IDrawable, public IUpdatable
     {

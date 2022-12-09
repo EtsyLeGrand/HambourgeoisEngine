@@ -24,7 +24,10 @@ void hambourgeois::LineCollider::Start()
 
 void hambourgeois::LineCollider::Draw()
 {
-	hambourgeois::Engine::Get().Graphics().DrawLine(p2x, p2y, p1x, p1y, Color::LIMEGREEN);
+	if (canDraw)
+	{
+		hambourgeois::Engine::Get().Graphics().DrawLine(p2x, p2y, p1x, p1y, Color::LIMEGREEN);
+	}
 }
 
 

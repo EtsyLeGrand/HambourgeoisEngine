@@ -9,6 +9,7 @@
 #include <PhysicsObject.h>
 #include <Canvas.h>
 #include <LineCollider.h>
+#include <LadderDropZone.h>
 
 
 class MainMenu : public hambourgeois::BaseScene {
@@ -72,6 +73,121 @@ void Level1::Load()
 	background->SetSize(224 * 3, 256 * 3);
 #pragma endregion
 
+#pragma region Floor
+
+	hambourgeois::Entity* f1;
+	f1 = Instantiate("Floor1");
+	f1->SetPosition(0, 744);
+	f1->SetSize(335, 0);
+
+	hambourgeois::LineCollider* f1collider = f1->AddComponent<hambourgeois::LineCollider>();
+	f1collider->LineFromRect(true);
+	//f1collider->EnableDraw();
+
+	hambourgeois::Entity* f2;
+	f2 = Instantiate("Floor2");
+	f2->SetPosition(335, 724);
+	f2->SetSize(335, 20);
+
+	hambourgeois::LineCollider* f2collider = f2->AddComponent<hambourgeois::LineCollider>();
+	f2collider->LineFromRect(true);
+	//f2collider->EnableDraw();
+
+	hambourgeois::Entity* f3;
+	f3 = Instantiate("Floor3");
+	f3->SetPosition(0, 622);
+	f3->SetSize(620, 38);
+
+	hambourgeois::LineCollider* f3collider = f3->AddComponent<hambourgeois::LineCollider>();
+	f3collider->LineFromRect(false);
+	f3collider->SetFloor(1);
+	//f3collider->EnableDraw();
+
+	hambourgeois::Entity* f4;
+	f4 = Instantiate("Floor4");
+	f4->SetPosition(50, 524);
+	f4->SetSize(620, 38);
+
+	hambourgeois::LineCollider* f4collider = f4->AddComponent<hambourgeois::LineCollider>();
+	f4collider->LineFromRect(true);
+	//f4collider->EnableDraw();
+
+	hambourgeois::Entity* f5;
+	f5 = Instantiate("Floor5");
+	f5->SetPosition(0, 426);
+	f5->SetSize(620, 38);
+
+	hambourgeois::LineCollider* f5collider = f5->AddComponent<hambourgeois::LineCollider>();
+	f5collider->LineFromRect(false);
+	//f5collider->EnableDraw();
+
+	hambourgeois::Entity* f6;
+	f6 = Instantiate("Floor6");
+	f6->SetPosition(50, 328);
+	f6->SetSize(620, 38);
+
+	hambourgeois::LineCollider* f6collider = f6->AddComponent<hambourgeois::LineCollider>();
+	f6collider->LineFromRect(true);
+	//f6collider->EnableDraw();
+
+	hambourgeois::Entity* f7;
+	f7 = Instantiate("Floor7");
+	f7->SetPosition(432, 254);
+	f7->SetSize(189, 13);
+
+	hambourgeois::LineCollider* f7collider = f7->AddComponent<hambourgeois::LineCollider>();
+	f7collider->LineFromRect(false);
+	//f7collider->EnableDraw();
+
+	hambourgeois::Entity* f8;
+	f8 = Instantiate("Floor8");
+	f8->SetPosition(0, 254);
+	f8->SetSize(432, 0);
+
+	hambourgeois::LineCollider* f8collider = f8->AddComponent<hambourgeois::LineCollider>();
+	f8collider->LineFromRect(false);
+	//f8collider->EnableDraw();
+
+#pragma endregion
+
+#pragma region Ladder
+	//hambourgeois::Entity* l1;
+	//l1 = Instantiate("Ladder1");
+	//f1->SetPosition(240, 660);
+	//f1->SetSize(24, 84);
+
+	//hambourgeois::Collider* l1collider = f1->AddComponent<hambourgeois::Collider>();
+	//l1collider->SetLayer("Broken Ladder");
+	//l1collider->SetColor(hambourgeois::Color::BLUEVIOLET);
+	//l1collider->EnableDraw();
+
+	hambourgeois::Entity* l1;
+	l1 = Instantiate("Ladder1");
+	l1->SetPosition(552, 678);
+	l1->SetSize(24, 52);
+
+	hambourgeois::Collider* l1collider = l1->AddComponent<hambourgeois::Collider>();
+	l1collider->SetLayer("Ladder");
+	l1collider->SetColor(hambourgeois::Color::VIOLET);
+	//l1collider->EnableDraw();
+#pragma endregion
+
+#pragma region Ladder Dropzone
+	hambourgeois::Entity* ld1;
+	ld1 = Instantiate("LadderDZ1");
+	ld1->SetPosition(552, 650);
+	ld1->SetSize(24, 24);
+
+	hambourgeois::Collider* ld1collider = ld1->AddComponent<hambourgeois::Collider>();
+	ld1collider->SetLayer("Ladder Dropzone");
+	ld1collider->SetColor(hambourgeois::Color::BLUE);
+	//ld1collider->EnableDraw();
+	
+	hambourgeois::LadderDropZone* dropzone1 = ld1->AddComponent<hambourgeois::LadderDropZone>();
+	dropzone1->SetLinkedLadder(l1);
+#pragma endregion
+
+
 #pragma region UI
 	size_t font = engine.Graphics().LoadFont("ressources/fonts/dk.ttf", 20);
 	hambourgeois::Entity* ui;
@@ -105,14 +221,16 @@ void Level1::Load()
 	mario->SetSize(16 * 3, 16 * 3);
 
 	hambourgeois::Animation* marioAnim = mario->AddComponent<hambourgeois::Animation>();
+
 	marioAnim->Load("ressources/images/mario_walk.png");
-	marioAnim->Init(4, 16, 16);
+	marioAnim->Init(6, 16, 16);
 	marioAnim->AddClip("walk", 0, 4, 0.1f);
+	marioAnim->AddClip("climb", 4, 2, 0.1f);
 	marioAnim->SetFlip(true, false);
 
 	hambourgeois::PhysicsObject* marioPhysics = mario->AddComponent<hambourgeois::PhysicsObject>();
 	marioPhysics->SetGravity(-9.8f);
-	marioPhysics->SetTerminalVelocity(15.0f);
+	marioPhysics->SetTerminalVelocity(150.0f);
 
 	hambourgeois::MarioController* controller = mario->AddComponent<hambourgeois::MarioController>();
 	controller->SetMarioSpeed(75.0f);
@@ -123,105 +241,6 @@ void Level1::Load()
 	//collider->EnableDraw();
 
 #pragma endregion
-
-#pragma region Floor
-	
-	hambourgeois::Entity* f1;
-	f1 = Instantiate("Floor1");
-	f1->SetPosition(0, 744);
-	f1->SetSize(335, 0);
-
-	hambourgeois::LineCollider* f1collider = f1->AddComponent<hambourgeois::LineCollider>();
-	f1collider->LineFromRect(true);
-	f1collider->EnableDraw();
-
-	hambourgeois::Entity* f2;
-	f2 = Instantiate("Floor2");
-	f2->SetPosition(335, 724);
-	f2->SetSize(335, 20);
-
-	hambourgeois::LineCollider* f2collider = f2->AddComponent<hambourgeois::LineCollider>();
-	f2collider->LineFromRect(true);
-	f2collider->EnableDraw();
-
-	hambourgeois::Entity* f3;
-	f3 = Instantiate("Floor3");
-	f3->SetPosition(0, 622);
-	f3->SetSize(620, 38);
-
-	hambourgeois::LineCollider* f3collider = f3->AddComponent<hambourgeois::LineCollider>();
-	f3collider->LineFromRect(false);
-	f3collider->EnableDraw();
-
-	hambourgeois::Entity* f4;
-	f4 = Instantiate("Floor4");
-	f4->SetPosition(50, 524);
-	f4->SetSize(620, 38);
-
-	hambourgeois::LineCollider* f4collider = f4->AddComponent<hambourgeois::LineCollider>();
-	f4collider->LineFromRect(true);
-	f4collider->EnableDraw();
-
-	hambourgeois::Entity* f5;
-	f5 = Instantiate("Floor5");
-	f5->SetPosition(0, 426);
-	f5->SetSize(620, 38);
-
-	hambourgeois::LineCollider* f5collider = f5->AddComponent<hambourgeois::LineCollider>();
-	f5collider->LineFromRect(false);
-	f5collider->EnableDraw();
-
-	hambourgeois::Entity* f6;
-	f6 = Instantiate("Floor6");
-	f6->SetPosition(50, 328);
-	f6->SetSize(620, 38);
-
-	hambourgeois::LineCollider* f6collider = f6->AddComponent<hambourgeois::LineCollider>();
-	f6collider->LineFromRect(true);
-	f6collider->EnableDraw();
-
-	hambourgeois::Entity* f7;
-	f7 = Instantiate("Floor7");
-	f7->SetPosition(432, 254);
-	f7->SetSize(189, 13);
-
-	hambourgeois::LineCollider* f7collider = f7->AddComponent<hambourgeois::LineCollider>();
-	f7collider->LineFromRect(false);
-	f7collider->EnableDraw();
-
-	hambourgeois::Entity* f8;
-	f8 = Instantiate("Floor8");
-	f8->SetPosition(0, 254);
-	f8->SetSize(432, 0);
-
-	hambourgeois::LineCollider* f8collider = f8->AddComponent<hambourgeois::LineCollider>();
-	f8collider->LineFromRect(false);
-	f8collider->EnableDraw();
-	
-#pragma endregion
-
-#pragma region Ladder
-	hambourgeois::Entity* l1;
-	l1 = Instantiate("Ladder1");
-	f1->SetPosition(240, 660);
-	f1->SetSize(24, 84);
-
-	hambourgeois::Collider* l1collider = f1->AddComponent<hambourgeois::Collider>();
-	l1collider->SetLayer("Broken Ladder");
-	l1collider->SetColor(hambourgeois::Color::BLUEVIOLET);
-	l1collider->EnableDraw();
-
-	hambourgeois::Entity* l2;
-	l2 = Instantiate("Ladder2");
-	l2->SetPosition(552, 678);
-	l2->SetSize(24, 52);
-
-	hambourgeois::Collider* l2collider = l2->AddComponent<hambourgeois::Collider>();
-	l2collider->SetLayer("Ladder");
-	l2collider->SetColor(hambourgeois::Color::VIOLET);
-	l2collider->EnableDraw();
-#pragma endregion
-
 
 }
 

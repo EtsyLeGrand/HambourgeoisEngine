@@ -154,6 +154,7 @@
     <ClInclude Include="includes\Component.h" />
     <ClInclude Include="includes\ConsoleLogger.h" />
     <ClInclude Include="includes\ICollisions.h" />
+    <ClInclude Include="includes\LadderDropZone.h" />
     <ClInclude Include="includes\LineCollider.h" />
     <ClInclude Include="includes\MarioController.h" />
     <ClInclude Include="includes\EKey.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="sources\Engine.cpp" />
     <ClCompile Include="sources\Entity.cpp" />
     <ClCompile Include="sources\FileLogger.cpp" />
+    <ClCompile Include="sources\LadderDropZone.cpp" />
     <ClCompile Include="sources\LineCollider.cpp" />
     <ClCompile Include="sources\MarioController.cpp" />
     <ClCompile Include="sources\PhysicsObject.cpp" />

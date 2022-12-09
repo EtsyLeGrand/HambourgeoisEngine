@@ -123,6 +123,9 @@
     <ClInclude Include="includes\BoxCollider.h">
       <Filter>includes\Components</Filter>
     </ClInclude>
+    <ClInclude Include="includes\LadderDropZone.h">
+      <Filter>includes\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp">
@@ -192,6 +195,9 @@
       <Filter>sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="sources\LineCollider.cpp">
+      <Filter>sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\LadderDropZone.cpp">
       <Filter>sources\Components</Filter>
     </ClCompile>
   </ItemGroup>

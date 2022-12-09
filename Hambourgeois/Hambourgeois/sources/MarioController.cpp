@@ -4,6 +4,7 @@
 #include <PhysicsObject.h>
 #include <Animation.h>
 #include <LineCollider.h>
+#include <LadderDropZone.h>
 
 static bool jumpKeyReleased = true;
 
@@ -21,11 +22,17 @@ hambourgeois::MarioController::MarioController(Entity* parent) : Component(paren
 
 void hambourgeois::MarioController::Update(float dt)
 {
-	HandleFloorCollisions();
-	HandleMovement();
-	
-
-
+	switch (state)
+	{
+		case Walking:
+			HandleLadderCollisions();
+			HandleFloorCollisions();
+			HandleMovement();
+			break;
+		case Climbing:
+			HandleClimb(dt);
+			break;
+	}
 }
 
 bool hambourgeois::MarioController::IsRightPressed()
@@ -90,6 +97,30 @@ bool hambourgeois::MarioController::IsJumpPressed()
 
 void hambourgeois::MarioController::HandleMovement()
 {
+	Entity* other = nullptr;
+	if (IsUpPressed() && ladderInRange != nullptr)
+	{
+		state = Climbing;
+		physicsObject->SetEnabled(false);
+		entity->SetPosition(ladderInRange->GetX() - ladderInRange->GetWidth()/2, entity->GetY());
+		animation->Play("climb", true);
+		currentFloor++;
+		return;
+	}
+	else if (IsDownPressed() && Engine::Get().Collisions().CollidesWithLayer(entity, "Ladder Dropzone", &other))
+	{
+		if (other->GetComponent<LadderDropZone>() != nullptr)
+		{
+			LadderDropZone* dropZone = other->GetComponent<LadderDropZone>();
+			state = Climbing;
+			physicsObject->SetEnabled(false);
+			entity->SetPosition(dropZone->GetLinkedLadder()->GetX() - dropZone->GetLinkedLadder()->GetWidth() / 2, entity->GetY() + entity->GetHeight() + 10);
+			// + 10 hardcodé. J'aurais pu le faire autrement, mais j'ai décidé de le faire avec une constante.
+			animation->Play("climb", true);
+			return;
+		}
+	}
+
 	if (IsRightPressed()) {
 		physicsObject->SetHSpeed(marioSpeed);
 		animation->SetFlip(true, false);
@@ -117,12 +148,59 @@ void hambourgeois::MarioController::HandleMovement()
 	}
 }
 
-void hambourgeois::MarioController::HandleFloorCollisions()
+void hambourgeois::MarioController::HandleClimb(float dt)
+{
+	if (IsUpPressed())
+	{
+		animation->Play("climb", true);
+		entity->Translate(0, -marioSpeed * dt);
+		HandleLadderCollisions();
+		if (ladderInRange == nullptr)
+		{
+			state = Walking;
+			physicsObject->SetEnabled(true);
+		}
+	}
+	else if (IsDownPressed())
+	{
+		animation->Play("climb", true);
+		entity->Translate(0, marioSpeed * dt);
+		if (HandleFloorCollisions())
+		{
+			state = Walking;
+			physicsObject->SetEnabled(true);
+			currentFloor--;
+		}
+	}
+	else
+	{
+		animation->Stop();
+	}
+}
+
+void hambourgeois::MarioController::HandleLadderCollisions()
+{
+	hambourgeois::Entity* hit = nullptr;
+	if (hambourgeois::Engine::Get().Collisions().CollidesWithLayer(entity, "Ladder", &hit)) {
+		ladderInRange = hit;
+	} else {
+		ladderInRange = nullptr;
+	}
+}
+
+bool hambourgeois::MarioController::HandleFloorCollisions()
 {
 	hambourgeois::Entity* hit = nullptr;
 	if (hambourgeois::Engine::Get().Collisions().CollidesWithFloorLayer(entity, &hit))
 	{
 		hambourgeois::LineCollider* floor = hit->GetComponent<LineCollider>();
+
+		//Pour faire en sorte de ne pas passer sous le plancher.
+		//Si tu veux tester, tu peux décommenter. J'avais presque fini.
+		/*if (floor->GetFloor() != currentFloor)
+		{
+			return false;
+		}*/
 
 		float slope = (floor->GetSlope());
 		float xCenter = entity->GetX() + (entity->GetWidth() / 2);
@@ -133,6 +211,8 @@ void hambourgeois::MarioController::HandleFloorCollisions()
 
 		entity->Translate(0, -dist - entity->GetHeight() / 2);
 
+		return true;
 	}
+	return false;
 }
 
