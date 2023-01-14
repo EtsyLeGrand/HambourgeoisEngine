@@ -32,6 +32,12 @@ private:
 	int currentBonus = 5000;
 };
 
+class Floor
+{
+public:
+	Floor(int )
+};
+
 
 void InitGameplay(hambourgeois::Engine& engine)
 {
@@ -169,10 +175,8 @@ void Level1::Load()
 	hambourgeois::Collider* l1collider = l1->AddComponent<hambourgeois::Collider>();
 	l1collider->SetLayer("Ladder");
 	l1collider->SetColor(hambourgeois::Color::VIOLET);
-	//l1collider->EnableDraw();
-#pragma endregion
+	l1collider->EnableDraw();
 
-#pragma region Ladder Dropzone
 	hambourgeois::Entity* ld1;
 	ld1 = Instantiate("LadderDZ1");
 	ld1->SetPosition(552, 650);
@@ -181,10 +185,35 @@ void Level1::Load()
 	hambourgeois::Collider* ld1collider = ld1->AddComponent<hambourgeois::Collider>();
 	ld1collider->SetLayer("Ladder Dropzone");
 	ld1collider->SetColor(hambourgeois::Color::BLUE);
-	//ld1collider->EnableDraw();
-	
+	ld1collider->EnableDraw();
+
 	hambourgeois::LadderDropZone* dropzone1 = ld1->AddComponent<hambourgeois::LadderDropZone>();
 	dropzone1->SetLinkedLadder(l1);
+
+	hambourgeois::Entity* l2;
+	l2 = Instantiate("Ladder2");
+	l2->SetPosition(96, 578);
+	l2->SetSize(24, 52);
+
+	hambourgeois::Collider* l2collider = l2->AddComponent<hambourgeois::Collider>();
+	l2collider->SetLayer("Ladder");
+	l2collider->SetColor(hambourgeois::Color::VIOLET);
+	l2collider->EnableDraw();
+
+	hambourgeois::Entity* ld2;
+	ld2 = Instantiate("LadderDZ2");
+	ld2->SetPosition(96, 550);
+	ld2->SetSize(24, 24);
+
+	hambourgeois::Collider* ld2collider = ld2->AddComponent<hambourgeois::Collider>();
+	ld2collider->SetLayer("Ladder Dropzone");
+	ld2collider->SetColor(hambourgeois::Color::BLUE);
+	ld2collider->EnableDraw();
+
+	hambourgeois::LadderDropZone* dropzone2 = ld2->AddComponent<hambourgeois::LadderDropZone>();
+	dropzone2->SetLinkedLadder(l2);
+
+
 #pragma endregion
 
 
@@ -252,14 +281,14 @@ void Level1::Update(float dt)
 
 void Level1::ChangeBonusText(std::string canvasId, std::string textId)
 {
-	if (timePassedInScene >= nextTimeToChangeBonus)
+	if (timePassedInScene >= nextTimeToChangeBonus && currentBonus >= 100)
 	{
 		currentBonus -= 100;
 		nextTimeToChangeBonus += timeToChangeBonus;
-		
+
 		hambourgeois::Canvas* canvas = hambourgeois::Engine::Get().World().Find(canvasId)->GetComponent<hambourgeois::Canvas>();
 		canvas->EditText(textId, std::to_string(currentBonus));
-	}
+	}	
 }
 
 void MainMenu::Load()
